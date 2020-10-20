@@ -7,16 +7,17 @@ import os
 
 def GravaModulo(modulo):
     print(f'{os.getcwd()} but in modulo')
-    dicio={'modulo':modulo,
+    dicio={'path': os.getcwd(),
+           'modulo':modulo,
            'funcao':str(),
-           'param' :[],
+           'param' :"",
            'resultado_obtido':'',
            'resulado_esperado':''
            }
     
-    with open('C:\\Users\\lucas\\Desktop\\temp.json', 'w', encoding='utf-8') as json_file:
+    with open('temp.json', 'w', encoding='utf-8') as json_file:
         json.dump(dicio, json_file, indent=4)
-    with open('C:\\Users\\lucas\\Desktop\\temp.xml', 'w', encoding='utf-8') as xisml:
+    with open('temp.xml', 'w', encoding='utf-8') as xisml:
         xisml.write(f'<xml>\n<modulo>{modulo}</modulo>')
     print("gravado")
     
@@ -24,13 +25,14 @@ def GravaModulo(modulo):
 def AdicionaChave(chave, valor):
     with open('temp.json', 'r', encoding='utf-8') as json_file:
         dicio=json.load(json_file)
-        dicio[chave]=valor
+        
+        dicio[chave]+=valor
     with open('temp.json', 'w', encoding='utf-8') as json_file:    
         json.dump(dicio, json_file, indent=4)
     with open('temp.xml', 'a', encoding='utf-8') as xisml:
         xisml.write(f'<{chave}>{valor}</{chave}>\n')
         if chave=='resultado_esperado':
-            fim="ABxmlC".replace("A", chr(60)).replace("B", chr(47)).replace("C",chr(62))
+            fim="ABxmlC".replace("A", chr(60)).replace("B", chr(47)).replace("C",chr(62))   #</>
             xisml.write(fim)
             xisml.write('\n')
             chave=False
@@ -39,11 +41,11 @@ def AdicionaChave(chave, valor):
         chave=True
             
 def AdicionaFuncao(funcao):
+    
     AdicionaChave('funcao', funcao.__name__)
 
 def AdicionaParam(param):
-    if not(isinstance(param, list)):
-        param=[param]
+    print("AdicionaParam")
     AdicionaChave("param", param)
 
 def AdicionaResultadoObtido(resultado):
