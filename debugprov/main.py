@@ -4,6 +4,7 @@ import traceback
 
 def main():
       try:
+            print('ok')
             NowInterface().run_script()
             ConsoleInterface().run()
       except:
