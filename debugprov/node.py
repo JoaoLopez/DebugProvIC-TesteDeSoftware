@@ -6,12 +6,12 @@ class Node:
     def __init__(self, ev_id, code_component_id, retrn, name, parent):
         self.ev_id = ev_id
         self.code_component_id = code_component_id
-        self.retrn = retrn
+        self.retrn = retrn #Não precisa ser folha!
         self.name = name
         self.parent = parent
         self.childrens = []
         #print(self.childrens)
-        self.validity = Validity.UNKNOWN
+        self.validity = Validity.UNKNOWN  #Retorna se o nó está correto.
         self.params = []
 
     def has_childrens(self):
