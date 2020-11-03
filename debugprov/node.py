@@ -37,6 +37,7 @@ class Node:
                  "and CMP.type = ? ")
         for tupl in cursor.execute(query, [self.code_component_id, '*args']):
             self.params.append(Parameter(tupl[0], tupl[1]))
+        print(self.params)
 
     def get_name(self):
         return "{} {}".format(self.ev_id, self.name)
