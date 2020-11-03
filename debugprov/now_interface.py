@@ -7,8 +7,8 @@ class NowInterface:
     def run_script(self):
         args = sys.argv
         print(args)
-        Modulo = args.pop(0)
-        os.environ['modulo']=Modulo
+        args.pop(0)
+        os.environ['modulo']=args[0]
         CriaJson(Modulo)
         #GravaModulo(args[0])
         print(os.getcwd())
