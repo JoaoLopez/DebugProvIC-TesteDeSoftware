@@ -45,7 +45,7 @@ class Node:
     
     def __repr__(self):
         msg="{} {}".format(self.ev_id, self.name)
-        if self.all_children_are_valid():
+        if self.all_childrens_are_valid():
             for x in self.childrens:
                 msg+=x.name
         return msg
