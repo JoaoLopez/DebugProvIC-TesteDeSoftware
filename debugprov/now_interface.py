@@ -1,13 +1,15 @@
 import sys
 import os
 import subprocess
-from debugprov.update_json import GravaModulo
+from debugprov.update_json_2 import CriaJson
 class NowInterface:
 
     def run_script(self):
         args = sys.argv
         print(args)
-        args.pop(0)
+        Modulo = args.pop(0)
+        os.environ['modulo']=Modulo
+        CriaJson()
         #GravaModulo(args[0])
         print(os.getcwd())
         now_call = ['now','run']
