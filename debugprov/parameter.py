@@ -1,4 +1,4 @@
-from debugprov import update_json2
+from debugprov import update_json_2
 class Parameter:
 
     def __init__(self, name, value):
