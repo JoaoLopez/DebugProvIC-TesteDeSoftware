@@ -10,7 +10,7 @@ class Node:
         self.name = name
         self.parent = parent
         self.childrens = []
-        print(self.childrens)
+        #print(self.childrens)
         self.validity = Validity.UNKNOWN
         self.params = []
 
@@ -46,6 +46,10 @@ class Node:
     
     def __repr__(self):
         msg="{} {}".format(self.ev_id, self.name)
+        if len(self.childrens):
+            msg+=str([f'{x.ev_id} {x.name}' for x in self.childrens])
+        
+        msg+= 'retorno + =' + retrn
         #for x in self.childrens:
         #    #msg+=x.name
         return msg
