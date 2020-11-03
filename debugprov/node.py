@@ -40,4 +40,5 @@ class Node:
         print(self.params)
 
     def get_name(self):
+        print("Name got{} {}".format(self.ev_id, self.name)
         return "{} {}".format(self.ev_id, self.name)
