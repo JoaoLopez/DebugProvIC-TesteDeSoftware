@@ -40,5 +40,12 @@ class Node:
         print(self.params)
 
     def get_name(self):
-        print("Name got{} {}".format(self.ev_id, self.name))
+        print(self)
         return "{} {}".format(self.ev_id, self.name)
+    
+    def __repr__(self):
+        msg="{} {}".format(self.ev_id, self.name)
+        if self.all_children_are_valid():
+            for x in self.childrens:
+                msg+=x.name
+        return msg
