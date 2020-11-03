@@ -9,7 +9,7 @@ class NowInterface:
         print(args)
         Modulo = args.pop(0)
         os.environ['modulo']=Modulo
-        CriaJson(modulo)
+        CriaJson(Modulo)
         #GravaModulo(args[0])
         print(os.getcwd())
         now_call = ['now','run']
