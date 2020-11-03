@@ -50,7 +50,8 @@ def CriaJson(modulo):
 		
             }
         }
-    with open(f'C:\\Users\\lucas\\Desktop\\estágio\\dbp\\jsons\\{modulo}.json', 'w', encoding='utf-8') as json_file:    
+    print(os.getcwd())
+    with open(f'{modulo}.json', 'w', encoding='utf-8') as json_file:    
         json.dump(dicio, json_file, indent=4)
     print('json criado')
 
