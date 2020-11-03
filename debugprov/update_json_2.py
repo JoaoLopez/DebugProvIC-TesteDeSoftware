@@ -39,6 +39,15 @@ def adiciona_validor_do_resultado(booleano):
     with open('MyJson.json', 'w', encoding='utf-8') as json_file:    
         json.dump(dicio, json_file, indent=4)
 
+def AdicionaNo(Nodo):
+    with open('MyJson.json', 'r', encoding='utf-8') as json_file:
+        dicio=json.load(json_file)
+        
+        dicio['body'][item]['parametros'][chave]=valor
+    with open('MyJson.json', 'w', encoding='utf-8') as json_file:    
+        json.dump(dicio, json_file, indent=4)
+
+
 def CriaJson(modulo):
     dicio={
             "header": {
