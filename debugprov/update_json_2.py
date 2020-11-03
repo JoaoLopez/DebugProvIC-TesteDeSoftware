@@ -51,7 +51,7 @@ def CriaJson(modulo):
             }
         }
     print(os.getcwd())
-    with open(f'{modulo}.json', 'w', encoding='utf-8') as json_file:    
+    with open(f'abcd.json', 'w', encoding='utf-8') as json_file:    
         json.dump(dicio, json_file, indent=4)
     print('json criado')
 
