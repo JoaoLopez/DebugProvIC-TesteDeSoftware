@@ -1,6 +1,6 @@
 from debugprov.node import Node
 from debugprov.execution_tree import ExecutionTree
-
+from debugprov.cls import limpa
 class ExecTreeCreator():
 
     def __init__(self, cursor):
@@ -21,8 +21,9 @@ class ExecTreeCreator():
         self.cursor.execute(self.query, [0])
         result = self.cursor.fetchall()
         if len(result) != 1:
-            raise ValueError(
-                "ValueError: Something wrong in database. {} root nodes found".format(len(result)))
+            limpa()
+            #raise ValueError(
+            #    "ValueError: Something wrong in database. {} root nodes found".format(len(result)))
 
         for tupl in self.cursor.execute(self.query, [0]):
             root = Node(tupl[0], tupl[1], tupl[2], tupl[3], None)
