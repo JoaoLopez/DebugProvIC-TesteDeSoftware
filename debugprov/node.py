@@ -10,7 +10,7 @@ class Node:
         self.name = name
         self.parent = parent
         self.childrens = []
-        print(childrens)
+        print(self.childrens)
         self.validity = Validity.UNKNOWN
         self.params = []
 
@@ -41,7 +41,7 @@ class Node:
         print(self.params)
 
     def get_name(self):
-        print(self)
+        #print(self)
         return "{} {}".format(self.ev_id, self.name)
     
     def __repr__(self):
