@@ -20,12 +20,10 @@ class ExecTreeCreator():
     def get_root(self) -> Node:
         self.cursor.execute(self.query, [0])
         result = self.cursor.fetchall()
-        try:
-            if len(result) != 1:
-                raise ValueError(
-                    "ValueError: Something wrong in database. {} root nodes found".format(len(result)))
-        except:
-            limpa()
+        
+        if len(result) != 1:
+            raise ValueError(
+                "ValueError: Something wrong in database. {} root nodes found".format(len(result)))
 
         for tupl in self.cursor.execute(self.query, [0]):
             root = Node(tupl[0], tupl[1], tupl[2], tupl[3], None)
