@@ -1,5 +1,7 @@
 from debugprov.parameter import Parameter
 from debugprov.validity import Validity
+import json
+import os
 
 class Node:
     
@@ -17,7 +19,7 @@ class Node:
     def has_childrens(self):
         return len(self.childrens) > 0
 
-    def has_childrens_with_validity(self, validity:Validity):
+    def has_childrens_with_validity(self, validity:Validity):   
         for c in self.childrens:
             if c.validity is validity:
                 return True
@@ -39,6 +41,20 @@ class Node:
         for tupl in cursor.execute(query, [self.code_component_id, '*args']):
             self.params.append(Parameter(tupl[0], tupl[1]))
         print(self.params)
+    
+    def into_Json(self):
+        file=os.environ.get("modulo")
+        with open(file, 'r', encoding='utf-8') as json_file:
+            thisNode={
+            'ev_id': self.ev_id, 
+            'code_component_id':self.code_component_id, 
+            'retrn': self.retrn,
+            'name': self.name,
+            }
+            dicio=json.load(json_file)
+            dicio[self.get_name()]=thisNode
+        with open(file, 'w', encoding='utf-8') as json_file:    
+            json.dump(dicio, json_file, indent=4)
 
     def get_name(self):
         #print(self)
@@ -53,3 +69,4 @@ class Node:
         #for x in self.childrens:
         #    #msg+=x.name
         return msg
+    

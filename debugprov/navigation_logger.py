@@ -16,6 +16,7 @@ class NavigationLogger:
         self.file.write(time_str + message + "\n")
 
     def log_node(self, node, sequence_num):
+        print("Estamos em log_node")
         seq_num = " {} ".format(str(sequence_num))
         self.log(seq_num + "-------------------------")
         self.log(seq_num + "Evaluating node {}".format(node.name))

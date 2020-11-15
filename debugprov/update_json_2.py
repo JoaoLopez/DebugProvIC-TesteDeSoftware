@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from time import time
 import os
-
+'''
 def Cria_novo_item_no_body():
     item=os.environ.get("item")
     with open('MyJson.json', 'r', encoding='utf-8') as json_file:
@@ -37,13 +37,13 @@ def adiciona_validor_do_resultado(booleano):
         dicio=json.load(json_file)
         dicio['body'][item]['resultadoValido']=booleano
     with open('MyJson.json', 'w', encoding='utf-8') as json_file:    
-        json.dump(dicio, json_file, indent=4)
+        json.dump(dicio, json_file, indent=4)'''
 
 def AdicionaNo(Nodo):
     with open('MyJson.json', 'r', encoding='utf-8') as json_file:
         dicio=json.load(json_file)
+        dicio['body'][str(Nodo)]=[str(valor) for valor in Nodo.childrens]
         
-        dicio['body'][item]['parametros'][chave]=valor
     with open('MyJson.json', 'w', encoding='utf-8') as json_file:    
         json.dump(dicio, json_file, indent=4)
 
