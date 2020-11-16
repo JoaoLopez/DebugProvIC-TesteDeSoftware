@@ -14,4 +14,8 @@ class ConsoleEvaluation:
             print (" {} | {} ".format(p.name, p.value))
         print("Returns: {}".format(node.retrn))
         answer = confirm('Is correct? ')
+        print("==== Entendendo o Answer===")
+        print(answer)
+        print(type(answer))
+        print("=== fim do answer ===")
         return answer
