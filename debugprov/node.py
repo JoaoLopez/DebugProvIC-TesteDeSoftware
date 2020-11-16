@@ -49,7 +49,7 @@ class Node:
             'ev_id': self.ev_id, 
             'code_component_id':self.code_component_id, 
             'retrn': self.retrn,
-            'name': self.name
+            'name': self.name,
             'answer': answer,
             }
             dicio=json.load(json_file)
