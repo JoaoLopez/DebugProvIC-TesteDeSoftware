@@ -66,7 +66,7 @@ class Node:
         if len(self.childrens):
             msg+=str([f'{x.ev_id} {x.name}' for x in self.childrens])
         
-        msg+= 'retorno + =' + retrn
+        msg+= 'retorno + =' + self.retrn
         #for x in self.childrens:
         #    #msg+=x.name
         return msg
