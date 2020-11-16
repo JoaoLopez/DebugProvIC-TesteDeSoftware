@@ -48,7 +48,7 @@ def AdicionaNo(Nodo):
         json.dump(dicio, json_file, indent=4)
 
 
-def CriaJson(modulo):
+def CriaJsonDescontinuado(modulo):
     dicio={
             "header": {
             "caminho":os.getcwd(),
@@ -64,6 +64,10 @@ def CriaJson(modulo):
         json.dump(dicio, json_file, indent=4)
     print('json criado')
 
+def CriaJson(modulo):
+    with open(modulo, 'w', encoding='utf-8') as s:
+        s.write("{}")
+        
 if __name__ == "__main__":
     CriaJson()        
     os.environ['item']=("MMC")
