@@ -9,7 +9,7 @@ class NowInterface:
         args = sys.argv
         print(args)
         args.pop(0)
-        os.environ['modulo']=args[0]+'.json'
+        os.environ['modulo']=args[0][:-3]+'.json'
         CriaJson(args[0])
         #limpa()
         #GravaModulo(args[0])
