@@ -9,8 +9,9 @@ class NowInterface:
         args = sys.argv
         print(args)
         args.pop(0)
-        os.environ['modulo']=args[0][:-3]+'.json'
-        CriaJson(args[0])
+        modulo=args[0][:-3]+'.json'
+        os.environ['modulo']=modulo
+        CriaJson(modulo)
         #limpa()
         #GravaModulo(args[0])
         print(os.getcwd())
