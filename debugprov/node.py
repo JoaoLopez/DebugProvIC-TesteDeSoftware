@@ -53,7 +53,7 @@ class Node:
             'answer': answer,
             }
             dicio=json.load(json_file)
-            dicio[self.get_name()]=thisNode
+            dicio[self.ev_id]=thisNode
         with open(file, 'w', encoding='utf-8') as json_file:    
             json.dump(dicio, json_file, indent=4)
 
