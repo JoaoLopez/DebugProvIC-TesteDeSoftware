@@ -42,14 +42,15 @@ class Node:
             self.params.append(Parameter(tupl[0], tupl[1]))
         print(self.params)
     
-    def into_Json(self):
+    def into_Json(self, answer):
         file=os.environ.get("modulo")
         with open(file, 'r', encoding='utf-8') as json_file:
             thisNode={
             'ev_id': self.ev_id, 
             'code_component_id':self.code_component_id, 
             'retrn': self.retrn,
-            'name': self.name,
+            'name': self.name
+            'answer': answer,
             }
             dicio=json.load(json_file)
             dicio[self.get_name()]=thisNode

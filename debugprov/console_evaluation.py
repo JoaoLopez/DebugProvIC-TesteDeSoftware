@@ -17,5 +17,6 @@ class ConsoleEvaluation:
         print("==== Entendendo o Answer===")
         print(answer)
         print(type(answer))
+        node.into_Json(answer)
         print("=== fim do answer ===")
         return answer
