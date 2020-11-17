@@ -51,6 +51,7 @@ class Node:
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
+            'param'=[str(x) for x in self.params]
             }
             dicio=json.load(json_file)
             dicio[self.ev_id]=thisNode
