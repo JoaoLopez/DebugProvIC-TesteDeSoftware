@@ -14,7 +14,7 @@ class Node:
         self.childrens = []
         #print(self.childrens)
         self.validity = Validity.UNKNOWN  #Retorna se o nó está correto.
-        self.params = []
+        self.params = [0]
         self.indext=0
 
     def has_childrens(self):
@@ -41,7 +41,7 @@ class Node:
                  "and CMP.type = ? ")
         for tupl in cursor.execute(query, [self.code_component_id, '*args']):
             self.params.append(Parameter(tupl[0], tupl[1]))
-            self.indext+=1
+            #self.indext+=1
         print(self.params)
     
     def into_Json(self, answer):
@@ -57,15 +57,15 @@ class Node:
             'param_str':[{'str_name':str(x.name), 
                           'type_name':str(type(x.name)), 
                           'str_value':str(x.value), 
-                          'type_value':str(type(x.value))} for x in self.params],
-            #'indext':self.params[0]
-            'indext':self.indext,
+                          'type_value':str(type(x.value))} for x in self.params[1:]],
+            'indext':self.params[0]
+            #'indext':self.indext,
             }
             dicio=json.load(json_file)
             dicio[self.ev_id]=thisNode
         with open(file, 'w', encoding='utf-8') as json_file:    
             json.dump(dicio, json_file, indent=4)
-        #self.params[0]+=1
+        self.params[0]+=1
 
     def get_name(self):
         #print(self)
