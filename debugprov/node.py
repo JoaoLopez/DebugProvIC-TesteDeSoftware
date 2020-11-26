@@ -53,7 +53,7 @@ class Node:
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param':[(x) for x in self.params]
+            'param':[(x) for x in self.params],
             'index':self.index
             }
             dicio=json.load(json_file)
