@@ -49,6 +49,7 @@ class Node:
         file=os.environ.get("modulo")
         
         with open(file, 'r', encoding='utf-8') as json_file:
+            dicio=json.load(json_file)
             if self.name in dicio['pilhas']:
                 dicio['pilhas'][self.name]+=1
             else:
@@ -66,7 +67,7 @@ class Node:
             #'indext':float(self.params[0][0])
             'indext':dicio['pilhas'].get(self.name),
             }
-            dicio=json.load(json_file)
+            
             dicio['params'][self.ev_id]=thisNode
         with open(file, 'w', encoding='utf-8') as json_file:    
             json.dump(dicio, json_file, indent=4)
