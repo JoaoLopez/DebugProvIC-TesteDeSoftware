@@ -62,7 +62,7 @@ class Node:
             #'indext':self.indext,
             }
             dicio=json.load(json_file)
-            dicio['parametros'][self.ev_id]=thisNode
+            dicio[self.ev_id]=thisNode
             if self.name in dicio['pilhas']:
                 dicio['pilhas'][self.name].append(self.name)
             else:
