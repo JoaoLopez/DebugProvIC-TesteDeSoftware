@@ -3,7 +3,7 @@ class Parameter:
 
     def __init__(self, name, value):
         #update_json.AdicionaParam(str((name, value)))
-        print(name, value, 'Um oferecimento, PARAM')
+        print(name, value)
         self.name = name
         self.value = value
     

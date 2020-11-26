@@ -4,7 +4,7 @@ import sqlite3
 
 from graphviz import Graph
 from prompt_toolkit.shortcuts import confirm, prompt
-
+from debugprov.update_json_2 import RenameJson
 from debugprov.node import Node
 from debugprov.execution_tree_creator import ExecTreeCreator
 from debugprov.top_down import TopDown
@@ -115,5 +115,5 @@ class ConsoleInterface:
         result_tree = nav.navigate()
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
-        vis.view_exec_tree(file_name)
-    
+        vis.view_exec_tree(file_name, end=True)
+        RenameJson(file_name)
