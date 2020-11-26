@@ -62,11 +62,11 @@ class Node:
             #'indext':self.indext,
             }
             dicio=json.load(json_file)
-            dicio[self.ev_id]=thisNode
+            dicio['params'][self.ev_id]=thisNode
             if self.name in dicio['pilhas']:
-                dicio['pilhas'][self.name].append(self.name)
+                dicio['pilhas'][self.name].append(self.ev_id)
             else:
-                dicio['pilhas'][self.name]=[self.name]
+                dicio['pilhas'][self.name]=[self.ev_id]
         with open(file, 'w', encoding='utf-8') as json_file:    
             json.dump(dicio, json_file, indent=4)
         self.params[0][0]+=1
