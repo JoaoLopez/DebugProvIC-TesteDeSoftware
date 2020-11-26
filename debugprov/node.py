@@ -58,7 +58,7 @@ class Node:
                           'type_name':str(type(x.name)), 
                           'str_value':str(x.value), 
                           'type_value':str(type(x.value))} for x in self.params[1]],
-            'indext':self.params[0][0]
+            'indext':float(self.params[0][0])
             #'indext':self.indext,
             }
             dicio=json.load(json_file)
