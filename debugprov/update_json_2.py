@@ -67,6 +67,10 @@ def CriaJsonDescontinuado(modulo):
 def CriaJson(modulo):
     with open(modulo, 'w', encoding='utf-8') as s:
         s.write("{}")
+ 
+def RenameJson(novoNome):
+    if novoNome.endswith('r'):
+        os.rename(os.environ.get("modulo"), novoNome+'.json')
         
 if __name__ == "__main__":
     CriaJson()        

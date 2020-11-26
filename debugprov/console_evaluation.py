@@ -10,13 +10,13 @@ class ConsoleEvaluation:
         # print("Evaluation_id: {}".format(node.ev_id))
         # print("Code_component_id: {}".format(node.code_component_id))
         print("Parameters: name | value ")
-        for p in node.params:
+        for p in node.params[1]:
             print (" {} | {} ".format(p.name, p.value))
         print("Returns: {}".format(node.retrn))
         answer = confirm('Is correct? ')
-        print("==== Entendendo o Answer===")
+        # print("==== Entendendo o Answer===")
         print(answer)
         print(type(answer))
         node.into_Json(answer)
-        print("=== fim do answer ===")
+        #print("=== fim do answer ===")
         return answer
