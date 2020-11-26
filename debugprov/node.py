@@ -60,7 +60,7 @@ class Node:
             dicio[self.ev_id]=thisNode
         with open(file, 'w', encoding='utf-8') as json_file:    
             json.dump(dicio, json_file, indent=4)
-        self.index+=1
+        self.indext+=1
 
     def get_name(self):
         #print(self)
