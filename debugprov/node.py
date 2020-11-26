@@ -15,6 +15,7 @@ class Node:
         #print(self.childrens)
         self.validity = Validity.UNKNOWN  #Retorna se o nó está correto.
         self.params = []
+        self.index=0
 
     def has_childrens(self):
         return len(self.childrens) > 0
@@ -44,6 +45,7 @@ class Node:
     
     def into_Json(self, answer):
         file=os.environ.get("modulo")
+        
         with open(file, 'r', encoding='utf-8') as json_file:
             thisNode={
             'ev_id': self.ev_id, 
@@ -51,12 +53,14 @@ class Node:
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param':[str(x) for x in self.params]
+            'param':[(x) for x in self.params]
+            'index':self.index
             }
             dicio=json.load(json_file)
             dicio[self.ev_id]=thisNode
         with open(file, 'w', encoding='utf-8') as json_file:    
             json.dump(dicio, json_file, indent=4)
+        self.index+=1
 
     def get_name(self):
         #print(self)
