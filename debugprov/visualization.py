@@ -47,8 +47,9 @@ class Visualization:
                     self.graph.edge(str(d.source.ev_id), str(d.target.ev_id), None, color=self.PROVENANCE_EDGE_COLOR, dir='back')
 
     def view_exec_tree(self, graph_name = 'exec_tree'):
-        self.generate_exec_tree(graph_name)
-        self.graph.view()
+        #self.generate_exec_tree(graph_name)
+        #self.graph.view()
+        pass
 
     def navigate(self, node:Node):
         chds = node.childrens
