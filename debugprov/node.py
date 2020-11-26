@@ -54,7 +54,10 @@ class Node:
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param_str':[{'str_name':str(x.name), 'type_name':str(type(x.name)), 'str_value':str(x.value), 'type_value':str(type(x.value))) for x in self.params],
+            'param_str':[{'str_name':str(x.name), 
+                          'type_name':str(type(x.name)), 
+                          'str_value':str(x.value), 
+                          'type_value':str(type(x.value))} for x in self.params],
             #'indext':self.params[0]
             'indext':self.indext,
             }
