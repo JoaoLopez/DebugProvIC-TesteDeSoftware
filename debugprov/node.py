@@ -15,7 +15,7 @@ class Node:
         #print(self.childrens)
         self.validity = Validity.UNKNOWN  #Retorna se o nó está correto.
         self.params = []
-        self.index=0
+        self.indext=0
 
     def has_childrens(self):
         return len(self.childrens) > 0
@@ -53,8 +53,8 @@ class Node:
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param':[(x) for x in self.params],
-            'index':self.index
+            'param_str':[(str(x), str(type(x)) for x in self.params],
+            'indext':self.indext
             }
             dicio=json.load(json_file)
             dicio[self.ev_id]=thisNode
