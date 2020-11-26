@@ -55,14 +55,18 @@ class Node:
             'name': self.name,
             'answer': answer,
             'param_str':[{'str_name':str(x.name), 
-                          'type_name':str(type(x.name)), 
+                          #'type_name':str(type(x.name)), 
                           'str_value':str(x.value), 
                           'type_value':str(type(x.value))} for x in self.params[1]],
             'indext':float(self.params[0][0])
             #'indext':self.indext,
             }
             dicio=json.load(json_file)
-            dicio[self.ev_id]=thisNode
+            dicio['parametros'][self.ev_id]=thisNode
+            if self.name in dicio['pilhas']:
+                dicio['pilhas'][self.name].append(self.name)
+            else:
+                dicio['pilhas'][self.name]=[self.name]
         with open(file, 'w', encoding='utf-8') as json_file:    
             json.dump(dicio, json_file, indent=4)
         self.params[0][0]+=1
