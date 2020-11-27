@@ -50,7 +50,7 @@ class Node:
         params=[{'str_name':str(x.name), 
                   #'type_name':str(type(x.name)), 
                   'str_value':str(x.value), 
-                  'type_value':str(type(x.value))} for x in self.params]
+                  'type_value':str(type(x.value))} for x in self.params[1]]
         with open(file, 'r', encoding='utf-8') as json_file:
             dicio=json.load(json_file)
             if self.name in dicio['pilhas']:
