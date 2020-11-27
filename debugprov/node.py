@@ -47,23 +47,30 @@ class Node:
     def into_Json(self, answer):
         indx=lambda: dicio['pilhas'][self.name]
         file=os.environ.get("modulo")
-        
+        params=[{'str_name':str(x.name), 
+                          #'type_name':str(type(x.name)), 
+                          'str_value':str(x.value), 
+                          'type_value':str(type(x.value))} for x in self.params]
         with open(file, 'r', encoding='utf-8') as json_file:
             dicio=json.load(json_file)
             if self.name in dicio['pilhas']:
                 dicio['pilhas'][self.name]+=1
             else:
                 dicio['pilhas'][self.name]=0
+            #if len(params)>1:
+            #    params=params[dicio['pilhas'][self.name]]
             thisNode={
             'ev_id': self.ev_id, 
             'code_component_id':self.code_component_id, 
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param_str':[{'str_name':str(x.name), 
+            'param_str': params[dicio['pilhas'][self.name]]
+            '''param_str':[{'str_name':str(x.name), 
                           #'type_name':str(type(x.name)), 
                           'str_value':str(x.value), 
-                          'type_value':str(type(x.value))} for x in self.params[1][::-1]][dicio['pilhas'].get(self.name)],
+                          'type_value':str(type(x.value))} for x in self.params[::-1]][dicio['pilhas'].get(self.name)],
+                          '''
             #'indext':float(self.params[0][0])
             #'indext':dicio['pilhas'].get(self.name),
             }
