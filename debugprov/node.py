@@ -57,15 +57,15 @@ class Node:
                 dicio['pilhas'][self.name]+=1
             else:
                 dicio['pilhas'][self.name]=0
-            #if len(params)>1:
-            #    params=params[dicio['pilhas'][self.name]]
+            try:
+                params=params[dicio['pilhas'][self.name]]
             thisNode={
             'ev_id': self.ev_id, 
             'code_component_id':self.code_component_id, 
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param_str': params[dicio['pilhas'][self.name]],
+            'param_str': params,
             #'''param_str':[{'str_name':str(x.name), 
             #              #'type_name':str(type(x.name)), 
             #              'str_value':str(x.value), 
