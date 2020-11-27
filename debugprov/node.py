@@ -65,7 +65,7 @@ class Node:
                           'str_value':str(x.value), 
                           'type_value':str(type(x.value))} for x in self.params[1][::-1]][dicio['pilhas'].get(self.name)],
             #'indext':float(self.params[0][0])
-            'indext':dicio['pilhas'].get(self.name),
+            #'indext':dicio['pilhas'].get(self.name),
             }
             
             dicio['params'][self.ev_id]=thisNode
