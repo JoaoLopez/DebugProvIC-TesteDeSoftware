@@ -57,10 +57,10 @@ class Node:
                 dicio['pilhas'][self.name]+=1
             else:
                 dicio['pilhas'][self.name]=0
-            try:
-                params=params[dicio['pilhas'][self.name]]
-            except:
-                pass
+            #try:
+            #    params=params[dicio['pilhas'][self.name]]
+            #except:
+            #    pass
             thisNode={
             'ev_id': self.ev_id, 
             'code_component_id':self.code_component_id, 
