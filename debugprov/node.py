@@ -47,7 +47,7 @@ class Node:
     def into_Json(self, answer):
         indx=lambda: dicio['pilhas'][self.name]
         file=os.environ.get("modulo")
-        params=['str_value':str(x.value),  for x in self.params[1]]
+        params=[str(x.value)  for x in self.params[1]]
         '''         #'str_name':str(x.name), 
                  #'type_name':str(type(x.name)), 
               
