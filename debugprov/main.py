@@ -13,14 +13,14 @@ def main():
     except:
         traceback.print_exc()      
         #cls.limpa(os.getcwd())
-    try:
-        MyMove()
-    except:
-        print("Move didn't work")
 
         
       
 
 if __name__ == "__main__":
     main()
+       
+    MyMove()
+    #except:
+    #    print("Move didn't work")
     #cls.limpa(os.getcwd())
