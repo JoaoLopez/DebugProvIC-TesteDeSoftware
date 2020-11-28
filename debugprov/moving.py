@@ -2,11 +2,12 @@ import os
 import datetime
 import shutil
 
-def MyMove(ambiente=None):
+def MyMove():
     arvorefinal=os.environ.get("file_name")
     resumo=input("Por favor, resuma o relatório:")
-    if not ambiente:
-        ambiente=os.environ.get("modulo")[:-6]
+    
+    ambiente=os.environ.get("modulo")
+    print(ambiente)
     pasta='.\\logs\\'
     if not os.path.isdir('logs'):
         os.makedirs(pasta)
