@@ -2,6 +2,7 @@ from debugprov.console_interface import ConsoleInterface
 from debugprov.now_interface import NowInterface
 import traceback
 import os
+from debugprov.moving import MyMove
 
 def main():
     try:
@@ -12,6 +13,10 @@ def main():
     except:
         traceback.print_exc()      
         #cls.limpa(os.getcwd())
+    try:
+        MyMove()
+    except:
+        print("Move didn't work")
 
         
       

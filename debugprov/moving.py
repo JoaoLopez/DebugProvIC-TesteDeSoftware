@@ -2,7 +2,8 @@ import os
 import datetime
 import shutil
 
-def MyMove(arvorefinal='exec_tree.gv', ambiente=None):
+def MyMove(ambiente=None):
+    arvorefinal=os.environ['modulo']=modulo
     resumo=input("Por favor, resuma o relatório:")
     if not ambiente:
         ambiente=os.environ.get("modulo")
