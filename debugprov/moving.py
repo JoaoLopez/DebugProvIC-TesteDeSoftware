@@ -6,7 +6,7 @@ def MyMove(ambiente=None):
     arvorefinal=os.environ.get("file_name")
     resumo=input("Por favor, resuma o relatório:")
     if not ambiente:
-        ambiente=os.environ.get("modulo")
+        ambiente=os.environ.get("modulo")[:-6]
     pasta='.\\logs\\'
     if not os.path.isdir('logs'):
         os.makedirs(pasta)
