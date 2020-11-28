@@ -19,7 +19,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-       
+    print("Saiu do main()")
     MyMove()
     #except:
     #    print("Move didn't work")
