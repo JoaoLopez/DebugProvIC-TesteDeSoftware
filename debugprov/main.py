@@ -10,17 +10,19 @@ def main():
 
         NowInterface().run_script()
         ConsoleInterface().run()
+        print("Saiu do main()")
+        MyMove()
+    
     except:
         traceback.print_exc()      
         #cls.limpa(os.getcwd())
 
-        
+     
       
 
 if __name__ == "__main__":
     main()
-    print("Saiu do main()")
-    MyMove()
+    
     #except:
     #    print("Move didn't work")
     #cls.limpa(os.getcwd())
