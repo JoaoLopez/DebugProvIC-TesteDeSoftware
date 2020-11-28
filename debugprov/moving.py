@@ -3,7 +3,7 @@ import datetime
 import shutil
 
 def MyMove(ambiente=None):
-    arvorefinal=os.environ['modulo']=modulo
+    arvorefinal=os.environ.get("file_name")
     resumo=input("Por favor, resuma o relatório:")
     if not ambiente:
         ambiente=os.environ.get("modulo")
