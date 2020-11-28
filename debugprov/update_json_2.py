@@ -71,7 +71,10 @@ def CriaJson(modulo):
 
 def RenameJson(novoNome):
     if novoNome.endswith('r'):
-        os.rename(os.environ.get("modulo"), novoNome+'.json')
+        try:
+            os.rename(os.environ.get("modulo"), novoNome+'.json')
+        except:
+            print("Não foi possivel renomear o arquivo")
         
 if __name__ == "__main__":
     CriaJson()        

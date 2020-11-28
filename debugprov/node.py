@@ -55,10 +55,10 @@ class Node:
         '''          
         with open(file, 'r', encoding='utf-8') as json_file:
             dicio=json.load(json_file)
-            if self.name in dicio['pilhas']:
-                dicio['pilhas'][self.name]+=1
-            else:
-                dicio['pilhas'][self.name]=0
+            if self.name not in dicio['pilhas']:
+                dicio['pilhas'][self.name]=[]
+            #else:                dicio['pilhas'][self.name]=0
+            dicio['pilhas'][self.name].append(str(self.ev_id))
             #try:
             #    params=params[dicio['pilhas'][self.name]]
             #except:
