@@ -14,7 +14,7 @@ from debugprov.provenance_enhancement import ProvenanceEnhancement
 from debugprov.single_stepping import SingleStepping
 from debugprov.divide_and_query import DivideAndQuery
 from debugprov.validity import Validity
-from debugprov import moving
+from debugprov.moving import MyMove
 class CustomVisualization(Visualization):
 
     def name_for_node(self, node:Node):
@@ -117,4 +117,4 @@ class ConsoleInterface:
         vis = Visualization(result_tree)
         vis.view_exec_tree(file_name, end=True)
         RenameJson(file_name)
-        moving.MyMove(file_name)
+        MyMove(file_name)
