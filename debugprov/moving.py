@@ -46,7 +46,7 @@ def MyMove():
     
     shutil.move(adress(f'{arvorefinal}.gv.pdf'), adress(pastah))
     shutil.move(adress(f'{arvorefinal}.gv'), adress(pastah))
-    shutil.move(adress(json), adress(pastah))
+    shutil.move(adress(json[:-5]), adress(pastah))
     if resumo:
         with open(f'{pasta}\\readme.txt', 'a', encoding='utf-8') as saida:
             saida.write(agora)
