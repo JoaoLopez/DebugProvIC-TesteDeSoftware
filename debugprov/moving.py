@@ -40,13 +40,13 @@ def MyMove():
         print("A pasta não existe")
     
     
-    json=f'{ambiente}.json'
+    json=f'{ambiente}'
     if arvorefinal.endswith('r'):
         json=arvorefinal+'.json'
     
     shutil.move(adress(f'{arvorefinal}.gv.pdf'), adress(pastah))
     shutil.move(adress(f'{arvorefinal}.gv'), adress(pastah))
-    shutil.move(adress(json[:-5]), adress(pastah))
+    shutil.move(adress(json), adress(pastah))
     if resumo:
         with open(f'{pasta}\\readme.txt', 'a', encoding='utf-8') as saida:
             saida.write(agora)
