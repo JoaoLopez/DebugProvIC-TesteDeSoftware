@@ -2,17 +2,22 @@ import os
 import datetime
 import shutil
 
-def move(arvorefinal):
-    resumo=input()
-    pasta='.\\logs'
+def MyMove(arvorefinal='exec_tree.gv', ambiente=None):
+    resumo=input("Por favor, resuma o relatório:")
+    if not ambiente:
+        ambiente=os.environ.get("modulo")
+    pasta='.\\logs\\'
     if not os.path.isdir('logs'):
         os.makedirs(pasta)
-    pasta+='\\{os.environ.get("modulo")}'
-    if not os.path.isdir(f'logs\\{os.environ.get("modulo")}'):
+    pasta=f'.\\logs\\{ambiente}\\'
+    try:
         os.makedirs(pasta)
-        with open(f'{pasta}/readme.txt', 'w', encoding='utf-8') as _: pass
+        with open(f'{pasta}\\readme.txt', 'w', encoding='utf-8') as _: pass
+    except:
+        pass
     agora = str(datetime.datetime.now())[2:18].replace(':', '_')
-    pastah=pasta+hoje
+    pastah=pasta+agora+'\\'
+    print(pastah)
     os.makedirs(pastah)
     mydir= '.noworkflow'
     ehGv=lambda nome:nome[:4].isdigit()
@@ -20,48 +25,33 @@ def move(arvorefinal):
     adress=lambda n: os.getcwd()+'\\'+n
     try:
         for item in gvs:
-            '''try:
-                #dia=os.path.getmtime(item)
-                #dia=datetime.datetime.fromtimestamp(dia).strftime('%Y-%m-%d')
-                os.makedirs(f'.\\logs\\{dia}')
-            except:
-                pass
-            '''
             novo=f'logs\\{dia}\\{item}'
             shutil.move(adress(item), adress(pastah))
-            printf(f'Transferido: {item}')
+            print(f'Transferido: {item}')
     except:
         pass
     
     if '.noworkflow' in os.listdir():
-        #ehExec=lambda nome: nome[:4]=='exec'
-        #gvs=list(filter(ehExec, os.listdir()))
-        #ag=datetime.datetime.now()
-        #ag=ag.strftime('%Y-%m-%d(%H;%M)')
-        #os.makedirs(f'.\\logs\\oldflows\\{ag}')
-        #novo=f'.\\logs\\oldflows\\{ag}\\'
         shutil.move(adress('.noworkflow'), adress(pastah))
-        #for item in gvs:
-        #    novo2=f'{novo}\\{{item}}'
-        #    shutil.move(adress(item), adress(novo))
-        printf("Cópia feita")
+        print("Cópia feita")
     else:
-        printf("A pasta não existe")
+        print("A pasta não existe")
     
     
-    json=f'{os.environ.get("modulo")}.json'
+    json=f'{ambiente}.json'
     if arvorefinal.endswith('r'):
         json=arvorefinal+'.json'
-    shutil.move(adress(f'{arvorefinal}.gz.pdf'))
-    shutil.move(adress(json))
+    
+    shutil.move(adress(f'{arvorefinal}.gv.pdf'), adress(pastah))
+    shutil.move(adress(f'{arvorefinal}.gv'), adress(pastah))
+    shutil.move(adress(json), adress(pastah))
     if resumo:
-        with open(f'{pasta}\readme.txt', 'a', encoding='utf-8') as saida:
+        with open(f'{pasta}\\readme.txt', 'a', encoding='utf-8') as saida:
             saida.write(agora)
             saida.write('\n')
             saida.write(resumo)
+            saida.write('\n')
+            saida.write('\n')
             print("Resumo atualizado")
-        
-    #except:
-    #    printf('fail .noworkflow')
-    
-    
+
+#MyMove('parado2', 'ProdCons')
