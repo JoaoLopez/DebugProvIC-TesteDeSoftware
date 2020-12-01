@@ -65,7 +65,7 @@ def CriaJsonDescontinuado(modulo):
     print('json criado')
 
 def CriaJson(modulo):
-    dicio={'pilhas':{}, 'params':{}}
+    dicio={'header':{'caminho':os.getcwd(),'modulo':modulo}, 'pilhas':{}, 'params':{}}
     with open(modulo, 'w', encoding='utf-8') as json_file:    
         json.dump(dicio, json_file, indent=4)
 
