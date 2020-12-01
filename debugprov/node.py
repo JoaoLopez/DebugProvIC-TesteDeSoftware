@@ -2,6 +2,7 @@ from debugprov.parameter import Parameter
 from debugprov.validity import Validity
 import json
 import os
+from debugprov.update_json_2 import instancia
 
 class Node:
     
@@ -47,7 +48,7 @@ class Node:
     def into_Json(self, answer):
         indx=lambda: dicio['pilhas'][self.name]
         file=os.environ.get("modulo")
-        params=[{x.name: x.value}  for x in self.params[1]]
+        params=[{x.name: {'str_value':x.value, 'type_value':instancia(x.value)}  for x in self.params[1]]
         '''         #'str_name':str(x.name), 
                  #'type_name':str(type(x.name)), 
               

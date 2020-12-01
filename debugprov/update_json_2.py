@@ -64,6 +64,14 @@ def CriaJsonDescontinuado(modulo):
         json.dump(dicio, json_file, indent=4)
     print('json criado')
 
+def instancia(string):
+	if string[0]==string[-1]=="'": return 1
+	if string.isdigit(): return 2
+	if string=="None":   return 3
+	if string[0]=="[":   return 4
+	return 5
+
+
 def CriaJson(modulo):
     dicio={'header':{'caminho':os.getcwd(),'modulo':modulo}, 'pilhas':{}, 'params':{}}
     with open(modulo, 'w', encoding='utf-8') as json_file:    
