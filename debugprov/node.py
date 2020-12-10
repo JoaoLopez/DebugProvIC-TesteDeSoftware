@@ -77,7 +77,7 @@ class Node:
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param_str': params2,
+            'param_str': params3,
             'indext':self.params[0][0]
             #'''param_str':[{'str_name':str(x.name), 
             #              #'type_name':str(type(x.name)), 
