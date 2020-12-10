@@ -49,6 +49,13 @@ class Node:
         indx=lambda: dicio['pilhas'][self.name]
         file=os.environ.get("modulo")
         params2=[{x.name: x.value}  for x in self.params[1]]
+        params3=dict()
+        for item in params2:
+            for key, value in item.items():
+                pass
+            if key not in params3:
+                params3[key]=[]
+            params3[key].append(value)
         '''         #'str_name':str(x.name), 
                  #'type_name':str(type(x.name)), 
               
@@ -71,7 +78,7 @@ class Node:
             'name': self.name,
             'answer': answer,
             'param_str': params2,
-            'param_1':self.params[0][0]
+            'indext':self.params[0][0]
             #'''param_str':[{'str_name':str(x.name), 
             #              #'type_name':str(type(x.name)), 
             #              'str_value':str(x.value), 
