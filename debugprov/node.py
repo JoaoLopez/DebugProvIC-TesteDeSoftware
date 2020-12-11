@@ -54,7 +54,7 @@ class Node:
                 JaRemovidos[kmenor]=vmenor
                 ParaRemover.append(kmaior)
         for i in ParaRemover[::-1]:
-            self.params[1].remove(i)
+            self.params[1].pop(i)
         return JaRemovidos
             
         
