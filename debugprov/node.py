@@ -48,9 +48,10 @@ class Node:
     def into_Json(self, answer):
         indx=lambda: dicio['pilhas'][self.name]
         file=os.environ.get("modulo")
+        #if len(self.params): x=self.params(0)
         params2=[{x.name: x.value}  for x in self.params[1]]
         params3=dict()
-        for item in params2:
+        for item in [params2.pop(0)]:
             for key, value in item.items():
                 pass
             if key not in params3:
