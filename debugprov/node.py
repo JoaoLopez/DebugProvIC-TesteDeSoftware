@@ -98,7 +98,7 @@ class Node:
             'name': self.name,
             'answer': answer,
             'param_str': self.removeFromParams()
-            'indext':self.params[0][0]
+            #'indext':self.params[0][0]
             #'''param_str':[{'str_name':str(x.name), 
             #              #'type_name':str(type(x.name)), 
             #              'str_value':str(x.value), 
