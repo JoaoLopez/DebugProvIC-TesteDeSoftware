@@ -48,8 +48,8 @@ class Node:
         JaRemovidos={}
         ParaRemover=[]
         for kmaior, vmaior in enumerate(self.params[1]):
-            for kmenor, vmenor in vmaior.items():
-                pass
+            kmenor=vmaior.name
+            vmenor=vmaior.value
             if kmenor not in JaRemovidos:
                 JaRemovidos[kmenor]=vmenor
                 ParaRemover.append(kmaior)
