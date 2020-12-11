@@ -44,19 +44,38 @@ class Node:
             self.params[1].append(Parameter(tupl[0], tupl[1]))
             #self.indext+=1
         print(self.params)
-    
+    def removeFromParams(self):
+        JaRemovidos={}
+        ParaRemover=[]
+        for kmaior, vmaior in enumerate(self.params[1]):
+            for kmenor, vmenor in vmaior.items():
+                pass
+            if kmenor not in JaRemovidos:
+                JaRemovidos[kmenor]=vmenor
+                ParaRemover.append(kmaior)
+        for i in ParaRemover[::-1]:
+            self.params[1].remove(i)
+        return JaRemovidos
+            
+        
+        
     def into_Json(self, answer):
         indx=lambda: dicio['pilhas'][self.name]
         file=os.environ.get("modulo")
         #if len(self.params): x=self.params(0)
         params2=[{x.name: x.value}  for x in self.params[1]]
         params3=dict()
-        for item in [params2.pop(0)]:
+        for item in params2:
             for key, value in item.items():
                 pass
             if key not in params3:
                 params3[key]=[]
             params3[key].append(value)
+        #params4={}
+        #if params3:
+        #    for key, value in item.items():
+        #        params4[key]=value.pop(0)
+        
         '''         #'str_name':str(x.name), 
                  #'type_name':str(type(x.name)), 
               
@@ -78,7 +97,7 @@ class Node:
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param_str': params3,
+            'param_str': self.removeFromParams()
             'indext':self.params[0][0]
             #'''param_str':[{'str_name':str(x.name), 
             #              #'type_name':str(type(x.name)), 
