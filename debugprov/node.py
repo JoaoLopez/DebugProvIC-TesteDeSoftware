@@ -43,7 +43,8 @@ class Node:
         for tupl in cursor.execute(query, [self.code_component_id, '*args']):
             self.params[1].append(Parameter(tupl[0], tupl[1]))
             #self.indext+=1
-        print(self.params)
+        #print(self.params)
+    
     def removeFromParams(self):
         JaRemovidos={}
         ParaRemover=[]
@@ -55,9 +56,7 @@ class Node:
                 ParaRemover.append(kmaior)
         for i in ParaRemover[::-1]:
             self.params[1].pop(i)
-        return JaRemovidos
-            
-        
+        return JaRemovidos    
         
     def into_Json(self, answer):
         indx=lambda: dicio['pilhas'][self.name]
@@ -97,7 +96,7 @@ class Node:
             'retrn': self.retrn,
             'name': self.name,
             'answer': answer,
-            'param_str': self.removeFromParams()
+            'param_str': params3,
             #'indext':self.params[0][0]
             #'''param_str':[{'str_name':str(x.name), 
             #              #'type_name':str(type(x.name)), 
