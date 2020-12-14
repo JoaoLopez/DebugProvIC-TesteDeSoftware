@@ -32,7 +32,7 @@ def MyMove():
             print(f'Transferido: {item}')
     except:
         pass
-    ambientepy=ambiente+".py"
+    ambientepy=ambiente.replace(".json", ".py")
     print("AMBIENTPY: ", ambientepy)
     shutil.copyfile(ambiente, adress(pastah[2:]+ambiente+".py"))
     
