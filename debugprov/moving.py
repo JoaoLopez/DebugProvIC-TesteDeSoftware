@@ -6,7 +6,7 @@ def MyMove():
     arvorefinal=os.environ.get("file_name")
     resumo=input("Por favor, resuma o relatório:")
     
-    ambiente=os.environ.get("modulo")[:-5]
+    ambiente=os.environ.get("modulo")
     print(ambiente)
     pasta='.\\logs\\'
     if not os.path.isdir('logs'):
@@ -34,7 +34,7 @@ def MyMove():
         pass
     ambientepy=ambiente+".py"+".py"
     print("AMBIENTPY: ", ambientepy)
-    shutil.copyfile(ambientepy[:-3], adress(pastah[2:]+ambientepy))
+    shutil.copyfile(ambiente, adress(pastah[2:]+ambientepy))
     
     if '.noworkflow' in os.listdir():
         shutil.move(adress('.noworkflow'), adress(pastah))
