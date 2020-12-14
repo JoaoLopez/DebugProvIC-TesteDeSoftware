@@ -34,7 +34,7 @@ def MyMove():
         pass
     ambientepy=ambiente+".py"
     print("AMBIENTPY: ", ambientepy)
-    shutil.copyfile(ambientepy, adress(pastah[2:]))
+    shutil.copyfile(adress(ambientepy), adress(pastah[2:]))
     
     if '.noworkflow' in os.listdir():
         shutil.move(adress('.noworkflow'), adress(pastah))
