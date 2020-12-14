@@ -3,10 +3,10 @@ import datetime
 import shutil
 
 def MyMove():
-    arvorefinal=os.environ.get("file_name")[:-5]
+    arvorefinal=os.environ.get("file_name")
     resumo=input("Por favor, resuma o relatório:")
     
-    ambiente=os.environ.get("modulo")
+    ambiente=os.environ.get("modulo")[:-5]
     print(ambiente)
     pasta='.\\logs\\'
     if not os.path.isdir('logs'):
@@ -32,7 +32,7 @@ def MyMove():
             print(f'Transferido: {item}')
     except:
         pass
-    shutil.copyfile(adress(arvorefinal+".py"), adress(pastah))
+    shutil.copyfile(adress(ambiente+".py"), adress(pastah))
     
     if '.noworkflow' in os.listdir():
         shutil.move(adress('.noworkflow'), adress(pastah))
