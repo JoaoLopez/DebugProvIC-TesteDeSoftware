@@ -32,9 +32,9 @@ def MyMove():
             print(f'Transferido: {item}')
     except:
         pass
-    ambientepy=ambiente+".py"+".py"
+    ambientepy=ambiente+".py"
     print("AMBIENTPY: ", ambientepy)
-    shutil.copyfile(ambiente.replace(".json", ".py"), adress(pastah[2:]+ambientepy))
+    shutil.copyfile(ambiente, adress(pastah[2:]+ambiente))
     
     if '.noworkflow' in os.listdir():
         shutil.move(adress('.noworkflow'), adress(pastah))
