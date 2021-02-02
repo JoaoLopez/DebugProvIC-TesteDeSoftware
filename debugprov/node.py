@@ -30,12 +30,12 @@ class Node:
 
     def get_parameters(self, cursor):
         query = ("select CC.name, EV.repr as 'value' "
-                 "from composition CMP "
-                 "join code_component CC on CMP.part_id = CC.id "
+                 "from code_component CC "
                  "join evaluation EV on EV.code_component_id = CC.id "
-                 "where CMP.whole_id = ? " 
-                 "and CMP.type = ? ")
-        for tupl in cursor.execute(query, [self.code_component_id, '*args']):
+                 "join dependency D on D.dependency_id = EV.id "
+                 "where D.type = 'argument' " 
+                 "and D.dependent_id = ? ")
+        for tupl in cursor.execute(query, [self.ev_id]):
             self.params.append(Parameter(tupl[0], tupl[1]))
 
     def get_name(self):
