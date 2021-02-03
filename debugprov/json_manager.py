@@ -8,7 +8,7 @@ def create_json(new_data = dict()):
 
 def add_node_to_json(nodo):
     try:
-        with open(name_json, 'r', encoding='utf-8' as json_file:
+        with open(name_json, 'r', encoding='utf-8') as json_file:
             my_json = json.load(json_file)
     except IOError:
         create_json()
