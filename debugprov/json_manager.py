@@ -15,9 +15,14 @@ def add_node_to_json(node):
         my_json = dict()
     print("==dicio==")
     node_dict = node.__dict__
-    print(node)
+    #node_dict['params']=[(node_dict['params'].name, node_dict['params'].name, value)
+    node_dict['params']=[(p.name, p.value) for p in node_dict['params']]
+    node_dict['validity']=1
+    node_dict['parent']=node_dict['parent'].ev_id
+    
+    print(node_dict)
     pprint(my_json)
-    my_json[nodo['ev_id']] = node_dict 
+    my_json[node_dict['ev_id']] = node_dict 
     create_json(my_json)
 
 def name_json():
