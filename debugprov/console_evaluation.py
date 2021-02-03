@@ -16,5 +16,5 @@ class ConsoleEvaluation:
         print("Returns: {}".format(node.retrn))
         answer = confirm('Is correct? ')
         if answer:
-            add_node_to_json(node.__dict__)
+            add_node_to_json(node)
         return answer
