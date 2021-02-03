@@ -4,7 +4,7 @@ import os
 
 def create_json(new_data = dict()):
     with open(name_json(), "w", encoding='utf-8') as json_file:
-        json.dump(new_data, json_file, ident=4)
+        json.dump(new_data, json_file, indent=4)
 
 def add_node_to_json(nodo):
     try:
