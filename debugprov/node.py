@@ -1,6 +1,6 @@
 from debugprov.parameter import Parameter
 from debugprov.validity import Validity
-
+from debugprov.json_manager import add_nodo_to_json
 class Node:
     
     def __init__(self, ev_id, code_component_id, retrn, name, parent):
@@ -39,4 +39,5 @@ class Node:
             self.params.append(Parameter(tupl[0], tupl[1]))
 
     def get_name(self):
+    
         return "{} {}".format(self.ev_id, self.name)
