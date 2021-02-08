@@ -58,9 +58,15 @@ def modificacoes_do_usuário(my_list):
         if nome_do_teste: my_list[0]= f"{tabs(1)}def test_{nome_do_teste.replace(' ', '_')}():"    
     return my_list
 
+def corrige_o_modulo(file):
+    if file.endswith(".py"): file = file[:-3]
+    if not file.endswith(".json"): file+=".json"
+    file = file.replace(" ", "_")
+    return file
 def leitor_json(file):
-    if not file.endswith('.json'): file+=".json"
-    modulo = file[:-5].replace(" ", "_")
+    #if not file.endswith('.json'): file+=".json"
+    file = corrige_o_modulo(file)
+    modulo = file[:-5]
     arquivo_de_teste = []
     arquivo_de_teste.append("import unittest")
     arquivo_de_teste.append(f"from {modulo} import *")
@@ -70,6 +76,7 @@ def leitor_json(file):
         with open(file, 'r') as json_file:
             dados = json.load(json_file)
     except:
+        print("o arquivo é", file)
         print("O arquivo não existe")
         return []
     
