@@ -23,7 +23,7 @@ def add_node_to_json(node):
     print("==dicio==")
     node_dict = {k:v for k, v in node.__dict__.items()}
     #node_dict['params']=[(node_dict['params'].name, node_dict['params'].name, value)
-    node_dict['params']=[{p.name: (p.value, try_create_dict(p.value))} for p in node_dict['params']]
+    node_dict['params']=[{p.name: p.value} for p in node_dict['params']]
     node_dict['validity']=1
     node_dict['parent']=node_dict['parent'].ev_id if node_dict['parent'] else 0
     node_dict['childrens']=[x.ev_id for x in node_dict['childrens']]
