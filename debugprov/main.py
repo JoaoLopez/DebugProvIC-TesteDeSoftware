@@ -1,8 +1,10 @@
+import sys
 from debugprov.console_interface import ConsoleInterface
 from debugprov.now_interface import NowInterface
 import traceback
 from debugprov.json_manager import create_json
 from debugprov.cls import limpa
+from debugprov.autotest import leitor_json
 
 def main():
       try:
@@ -10,6 +12,7 @@ def main():
             NowInterface().run_script()
             create_json()
             ConsoleInterface().run()
+            leitor_json(sys.argv[0])
       except:
             traceback.print_exc()      
 
