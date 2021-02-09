@@ -1,6 +1,7 @@
 from debugprov.node import Node
 from prompt_toolkit.shortcuts import confirm
-from debugprov.json_manager import add_node_to_json
+#from debugprov.json_manager import add_node_to_json
+from debugprov.autotest import node_manager
 
 class ConsoleEvaluation:
 
@@ -16,5 +17,5 @@ class ConsoleEvaluation:
         print("Returns: {}".format(node.retrn))
         answer = confirm('Is correct? ')
         if answer:
-            add_node_to_json(node)
+            node_manager(node)
         return answer

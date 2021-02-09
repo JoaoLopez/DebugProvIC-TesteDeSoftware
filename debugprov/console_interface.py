@@ -115,5 +115,5 @@ class ConsoleInterface:
         result_tree = nav.navigate()
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
-        vis.view_exec_tree(file_name)
+        vis.view_exec_tree(file_name, show=True)
     

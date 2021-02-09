@@ -3,7 +3,7 @@ from ast import literal_eval
 import json
 from pprint import pprint
 
-from debugprov.json_manager import set_dictonary
+from debugprov.json_manager import set_dictionary
 
 #funções auxiliares
 def tabs(n): return " "*4*n
