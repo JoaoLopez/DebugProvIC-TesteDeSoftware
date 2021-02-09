@@ -3,16 +3,52 @@ from ast import literal_eval
 import json
 from pprint import pprint
 
+from debugprov.json_manager import set_dictonary
 
+#funções auxiliares
 def tabs(n): return " "*4*n
 
 def leval(expr):
-    try:
-        expr = literal_eval(expr)
-        if isinstance(expr, str): expr=f"'{expr}'"
-    except:
-        pass
+    expr = literal_eval(expr)
+    if isinstance(expr, str): expr=f"'{expr}'"
+    
     return expr
+
+def corrige_o_modulo(file):
+    if file.endswith(".py"): file = file[:-3]
+    if not file.endswith(".json"): file+=".json"
+    file = file.replace(" ", "_")
+    return file
+
+def nomes_dos_arquivos():
+    base    = sys.argv[0].replace(" ", "_")
+    print(f"::::: base {base}")
+    modulo  = base[:-3]
+    my_json = modulo+".json"
+    return {'py':base, 'modulo':modulo, 'json':my_json}
+    
+#funções para a geração sem json
+def header_manager():
+    modulo = nomes_dos_arquivos().get('modulo')
+    arquivo_de_teste = header(modulo)
+    persiste_lista_em_arquivo_py(arquivo_de_teste, modulo, 'w')
+    
+def node_manager(nodo):
+    modulo = nomes_dos_arquivos().get('modulo')
+    nodo = set_dictionary(nodo)
+    arquivo_de_teste = gera_teste_a_partir_do_nodo(nodo)
+    persiste_lista_em_arquivo_py(arquivo_de_teste, modulo, 'a')
+
+
+#funções do núcleo
+def header(modulo):
+    arquivo_de_teste = []
+    arquivo_de_teste.append("import unittest")
+    arquivo_de_teste.append(f"from {modulo} import *")
+    arquivo_de_teste.append("\n\n")
+    arquivo_de_teste.append(f"class Test_{modulo.title()}(unittest.TestCase):")
+    arquivo_de_teste.append(f"\n")
+    return arquivo_de_teste
 
 def gera_teste_a_partir_do_nodo(entrada):
     '''
@@ -35,13 +71,53 @@ def gera_teste_a_partir_do_nodo(entrada):
         for key, value in item.items(): pass
         #print(key, value)
         ch=f"var_{ch}"
-        my_list.append(f"{tabs(2)}{ch} = {leval(value)}")
+        try:
+            my_list.append(f"{tabs(2)}{ch} = {leval(value)}")
+        except:
+            return []
         novo_nome = novo_nome.replace(key, ch, 1)
-    my_list.append(f"{tabs(2)}self.assertEqual({novo_nome}, {leval(entrada['retrn'])})")
+    try:
+        my_list.append(f"{tabs(2)}self.assertEqual({novo_nome}, {leval(entrada['retrn'])})")
+    except:
+        return []
     my_list.append("\n")
     my_list = modificacoes_do_usuário(my_list)
     return my_list
 
+def persiste_lista_em_arquivo_py(lista, file, op):
+    if op != 'a': op='w'
+    new_file = f"test_{file}.py"
+    code = "\n".join(lista)
+    with open(new_file, op, encoding='utf-8') as s:
+        s.write(code)
+    return None
+
+#Programa a ser executado se existe json    
+def leitor_json(file):
+    #if not file.endswith('.json'): file+=".json"
+    aux = nomes_dos_arquivos()
+    modulo = aux.get('modulo')
+    
+    arquivo_de_teste = []
+    arquivo_de_teste+=header(modulo)
+    try:
+        with open(aux.get('json'), 'r') as json_file:
+            dados = json.load(json_file)
+    except:
+        print("o arquivo é", aux.get('json'))
+        print("O arquivo não existe")
+        return []
+    
+    #print(dados)
+    #del dados['1']
+    for v in dados.values():
+        arquivo_de_teste+=gera_teste_a_partir_do_nodo(v)
+    for lin in arquivo_de_teste:
+        print(lin)
+    persiste_lista_em_arquivo_py(arquivo_de_teste, modulo, 'm')
+    
+
+#Condicionais a serem implementadas
 def modificacoes_do_usuário(my_list):
     '''
     Se no ele vai perguntar ao usuário se deseja salvar aquele
@@ -58,42 +134,15 @@ def modificacoes_do_usuário(my_list):
         if nome_do_teste: my_list[0]= f"{tabs(1)}def test_{nome_do_teste.replace(' ', '_')}():"    
     return my_list
 
-def corrige_o_modulo(file):
-    if file.endswith(".py"): file = file[:-3]
-    if not file.endswith(".json"): file+=".json"
-    file = file.replace(" ", "_")
-    return file
-def leitor_json(file):
-    #if not file.endswith('.json'): file+=".json"
-    file = corrige_o_modulo(file)
-    modulo = file[:-5]
-    arquivo_de_teste = []
-    arquivo_de_teste.append("import unittest")
-    arquivo_de_teste.append(f"from {modulo} import *")
-    arquivo_de_teste.append("\n\n")
-    arquivo_de_teste.append(f"class Test_{modulo.title()}(unittest.TestCase):")
-    try:
-        with open(file, 'r') as json_file:
-            dados = json.load(json_file)
-    except:
-        print("o arquivo é", file)
-        print("O arquivo não existe")
-        return []
+def quer_os_tests(file):
+    opcoes = ["[{}] - Não quero gerar testes",
+              "[{}] - Quero gerar todos os testes e sem personalizações",
+              "[{}] - Quero poder escolher que testes criar e editar seus respectivos nomes"]
+    for key, value in enumerate(opcoes):
+        print(value.format(key))
+    resposta = int(input("O que deseja?"))
+    return resposta
     
-    #print(dados)
-    del dados['1']
-    for v in dados.values():
-        arquivo_de_teste+=gera_teste_a_partir_do_nodo(v)
-    for lin in arquivo_de_teste:
-        print(lin)
-    persiste_lista_em_arquivo_py(arquivo_de_teste, modulo)
-    
-def persiste_lista_em_arquivo_py(lista, file):
-    new_file = f"test_{file}.py"
-    code = "\n".join(lista)
-    with open(new_file, 'w', encoding='utf-8') as s:
-        s.write(code)
-    return None
 
 if __name__ == "__main__":
     #doctest.testmod()

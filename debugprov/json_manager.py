@@ -21,6 +21,12 @@ def add_node_to_json(node):
     except:
         my_json = dict()
     print("==dicio==")
+    node_dict = set_dictonary(node)
+    pprint(my_json)
+    my_json[node_dict['ev_id']] = node_dict 
+    create_json(my_json)
+
+def set_dictonary(node):
     node_dict = {k:v for k, v in node.__dict__.items()}
     #node_dict['params']=[(node_dict['params'].name, node_dict['params'].name, value)
     node_dict['params']=[{p.name: p.value} for p in node_dict['params']]
@@ -28,10 +34,7 @@ def add_node_to_json(node):
     node_dict['parent']=node_dict['parent'].ev_id if node_dict['parent'] else 0
     node_dict['childrens']=[x.ev_id for x in node_dict['childrens']]
     node_dict['retrn_d']=try_create_dict(node_dict['retrn'])
-    print(node_dict)
-    pprint(my_json)
-    my_json[node_dict['ev_id']] = node_dict 
-    create_json(my_json)
-
+    return node_dict
+    
 def name_json():
     return f"{sys.argv[0][:-3]}.json"
