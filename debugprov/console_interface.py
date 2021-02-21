@@ -92,7 +92,9 @@ class ConsoleInterface:
         exec_tree = creator.create_exec_tree()
         self.select_nav_strategy()
         nav = self.choosen_nav_strategy(exec_tree) 
-        if self.ask_use_prov():
+        #use_prov = self.ask_use_prov()
+        use_prov = False
+        if use_prov:
             prov = ProvenanceEnhancement(exec_tree, cursor)
             strategy = self.ask_use_wrong_data() 
             if strategy == 1:
