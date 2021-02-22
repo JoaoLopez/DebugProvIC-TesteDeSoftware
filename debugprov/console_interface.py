@@ -57,6 +57,7 @@ class ConsoleInterface:
         for idx,obj in enumerate(nav_names):
             print('[{}] - {}'.format(str(idx+1),obj))
         ans = prompt('> ')
+        print(ans, type(ans))
         self.choosen_nav_strategy = self.NAVIGATION_STRATEGIES[int(ans)-1] 
         
     def ask_use_prov(self):
