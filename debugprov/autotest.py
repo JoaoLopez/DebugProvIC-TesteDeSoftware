@@ -12,11 +12,13 @@ class Binder:
         #print(f"::::: base {base}")
         self.modulo  = self.base[:-3]
         self.my_json = self.modulo+".json"
-        self.test = f"test_{self.base}.py"
+        self.test = f"test_{self.base}"
         try:
             with open(self.test, 'r', encoding='utf-8') as e:
-                self.arquivo_de_teste = e.readlines()
+                self.content = e.readlines()
+                self.arquivo_de_teste = []
         except:
+            self.content = [""]
             self.arquivo_de_teste = self.header()
             
         
@@ -60,7 +62,7 @@ class Binder:
             return []
         my_list = []
         #Criando o nome do teste
-        nome_do_teste = f"{tabs(1)}def test_node_{entrada['ev_id']}_{len(self.arquivo_de_teste)}(self):"    
+        nome_do_teste = f"{tabs(1)}def test_node_{entrada['ev_id']}_{len(self.content)}(self):"    
         my_list.append(nome_do_teste)
         #print(entrada['name'])
         novo_nome = str(entrada['name'])
@@ -83,7 +85,8 @@ class Binder:
         self.arquivo_de_teste+=my_list
 
     def persiste_lista_em_arquivo_py(self):
-        code = "\n".join(lista)
+        code = "".join(self.content)
+        code+= "\n".join(self.arquivo_de_teste)
         with open(self.test, 'w', encoding='utf-8') as s:
             s.write(code)
         return None

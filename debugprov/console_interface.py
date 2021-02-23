@@ -14,15 +14,14 @@ from debugprov.provenance_enhancement import ProvenanceEnhancement
 from debugprov.single_stepping import SingleStepping
 from debugprov.divide_and_query import DivideAndQuery
 from debugprov.validity import Validity
-from debugprov.autotest import Binder
+
 
 class CustomVisualization(Visualization):
 
     def name_for_node(self, node:Node):
         return " {} {} '{}'".format(str(node.ev_id),node.name,str(node.retrn))
 
-    def navigate(self, node:Node, binder):
-        binder.node_manager(node)
+    def navigate(self, node:Node):
         chds = node.childrens
         for n in chds:
             self.graph.edge(str(node.ev_id), str(n.ev_id), None, dir='forward')
@@ -100,7 +99,7 @@ class ConsoleInterface:
         print(nav, type(nav))
         #use_prov = self.ask_use_prov()
         use_prov = False
-        self.binder = Binder()
+        
         if use_prov:
             prov = ProvenanceEnhancement(exec_tree, cursor)
             strategy = self.ask_use_wrong_data() 
@@ -121,9 +120,9 @@ class ConsoleInterface:
                 ev_id = int(prompt('> '))
                 prov.enhance(ev_id)
 
-        result_tree = nav.navigate(binder)
+        result_tree = nav.navigate()
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
         vis.view_exec_tree(file_name, show=True)
-        binder.end()
+        
     

@@ -5,10 +5,12 @@ from debugprov.validity import Validity
 from debugprov.visualization import Visualization
 from debugprov.answer_reader import AnswerReader
 from debugprov.navigation_logger import NavigationLogger
+from debugprov import autotest
 
 class NavigationStrategy:
 
     def __init__(self, exec_tree: ExecutionTree, automated = False, answer_file = None):
+        self.binder = autotest.Binder()
         self.exec_tree = exec_tree
         self.AUTOMATED_NAVIGATION = automated
         if self.AUTOMATED_NAVIGATION:
@@ -25,6 +27,7 @@ class NavigationStrategy:
         raise NotImplementedError("Abstract method: Please Implement this method in subclass")
 
     def evaluate(self, node: Node) -> Node:
+        self.binder.node_manager(node)
         if node.validity is Validity.UNKNOWN:
             if self.AUTOMATED_NAVIGATION:
                 self._automated_evaluation(node)
@@ -82,6 +85,7 @@ class NavigationStrategy:
             return False
     
     def finish_navigation(self):
+        self.binder.end()
         if self.exec_tree.buggy_node is None:
             invalid_nodes = [n.ev_id for n in self.exec_tree.get_all_nodes() if n.validity is Validity.INVALID]        
             if len(invalid_nodes) == 0:
