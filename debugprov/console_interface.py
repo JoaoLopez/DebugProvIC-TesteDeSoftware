@@ -14,13 +14,15 @@ from debugprov.provenance_enhancement import ProvenanceEnhancement
 from debugprov.single_stepping import SingleStepping
 from debugprov.divide_and_query import DivideAndQuery
 from debugprov.validity import Validity
+from debugprov.autotest import Binder
 
 class CustomVisualization(Visualization):
 
     def name_for_node(self, node:Node):
         return " {} {} '{}'".format(str(node.ev_id),node.name,str(node.retrn))
 
-    def navigate(self, node:Node):
+    def navigate(self, node:Node, binder):
+        binder.node_manager(node)
         chds = node.childrens
         for n in chds:
             self.graph.edge(str(node.ev_id), str(n.ev_id), None, dir='forward')
@@ -57,12 +59,14 @@ class ConsoleInterface:
         for idx,obj in enumerate(nav_names):
             print('[{}] - {}'.format(str(idx+1),obj))
         ans = prompt('> ')
-        print(ans, type(ans))
         self.choosen_nav_strategy = self.NAVIGATION_STRATEGIES[int(ans)-1] 
         
     def ask_use_prov(self):
         return confirm('Do you want to use provenance enhancement? ')
-
+    
+    def ask_use_auto(self):
+        return confirm('Do you want program execute alone? ')
+        
     def ask_use_wrong_data(self):
         ans = 0
         while (ans != 1 and ans != 2 and ans != 3):
@@ -93,8 +97,10 @@ class ConsoleInterface:
         exec_tree = creator.create_exec_tree()
         self.select_nav_strategy()
         nav = self.choosen_nav_strategy(exec_tree) 
+        print(nav, type(nav))
         #use_prov = self.ask_use_prov()
         use_prov = False
+        self.binder = Binder()
         if use_prov:
             prov = ProvenanceEnhancement(exec_tree, cursor)
             strategy = self.ask_use_wrong_data() 
@@ -115,8 +121,9 @@ class ConsoleInterface:
                 ev_id = int(prompt('> '))
                 prov.enhance(ev_id)
 
-        result_tree = nav.navigate()
+        result_tree = nav.navigate(binder)
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
         vis.view_exec_tree(file_name, show=True)
+        binder.end()
     

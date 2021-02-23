@@ -32,7 +32,7 @@ def set_dictionary(node):
     node_dict['params']=[{p.name: p.value} for p in node_dict['params']]
     node_dict['validity']=1
     node_dict['parent']=node_dict['parent'].ev_id if node_dict['parent'] else 0
-    node_dict['childrens']=[x.ev_id for x in node_dict['childrens']]
+    node_dict['childrens']=node.has_childrens()
     node_dict['retrn_d']=try_create_dict(node_dict['retrn'])
     return node_dict
     

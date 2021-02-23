@@ -1,10 +1,10 @@
 from debugprov.node import Node
 from prompt_toolkit.shortcuts import confirm
 #from debugprov.json_manager import add_node_to_json
-from debugprov.autotest import node_manager
+
 
 class ConsoleEvaluation:
-
+    
     def evaluate_node(node: Node):
         print("-------------------------")
         print("Evaluating node {} {}".format(str(node.ev_id),node.name))
@@ -17,6 +17,5 @@ class ConsoleEvaluation:
         print("Returns: {}".format(node.retrn))
         #answer = confirm('Is correct? ')
         answer = True
-        if answer:
-            node_manager(node)
+        
         return answer
