@@ -27,7 +27,6 @@ class NavigationStrategy:
         raise NotImplementedError("Abstract method: Please Implement this method in subclass")
 
     def evaluate(self, node: Node) -> Node:
-        self.binder.node_manager(node)
         if node.validity is Validity.UNKNOWN:
             if self.AUTOMATED_NAVIGATION:
                 self._automated_evaluation(node)
@@ -60,10 +59,13 @@ class NavigationStrategy:
         answer = ConsoleEvaluation.evaluate_node(node)
         if answer:
             # The YES answer prunes the subtree rooted at N
+            self.binder.node_manager(node)
             self.recursive_validate(node)
         else:
             # The NO answer prunes all the nodes of the ET,
             # exept the subtree rooted at N
+            node.retrn = input("Say the waited return")
+            self.binder.node_manager(node)
             node.validity = Validity.INVALID
             self.recursive_validate(self.exec_tree.root_node,node)
         self.exec_tree.node_under_evaluation = None

@@ -1,9 +1,10 @@
 import sys
+from debugprov.autotest.cls import limpa
 from debugprov.console_interface import ConsoleInterface
 from debugprov.now_interface import NowInterface
 import traceback
 from debugprov.autotest.json_manager import create_json
-from debugprov.autotest.cls import limpa
+
 
 def main():
       try:
@@ -13,5 +14,7 @@ def main():
       except:
             traceback.print_exc()      
 
+
 if __name__ == "__main__":
+    print("sucesso")
     main()

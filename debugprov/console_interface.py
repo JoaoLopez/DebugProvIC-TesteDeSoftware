@@ -4,7 +4,6 @@ import sqlite3
 
 from graphviz import Graph
 from prompt_toolkit.shortcuts import confirm, prompt
-
 from debugprov.node import Node
 from debugprov.treegui.execution_tree_creator import ExecTreeCreator
 from debugprov.strategies.top_down import TopDown

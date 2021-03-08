@@ -4,7 +4,7 @@ from ast import literal_eval
 import json
 from pprint import pprint
 
-from debugprov.json_manager import set_dictionary
+from debugprov.autotest.json_manager import set_dictionary
 
 class Binder:
     def __init__(self):
