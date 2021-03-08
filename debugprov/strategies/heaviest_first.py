@@ -1,5 +1,5 @@
 import copy
-from debugprov.navgiation_strategy import NavigationStrategy
+from debugprov.navegation.navgiation_strategy import NavigationStrategy
 from debugprov.node import Node
 from debugprov.validity import Validity
 

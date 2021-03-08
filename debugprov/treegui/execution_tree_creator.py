@@ -1,5 +1,5 @@
 from debugprov.node import Node
-from debugprov.execution_tree import ExecutionTree
+from debugprov.treegui.execution_tree import ExecutionTree
 
 class ExecTreeCreator():
 

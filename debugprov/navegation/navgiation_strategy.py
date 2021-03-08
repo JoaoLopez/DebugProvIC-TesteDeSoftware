@@ -1,11 +1,11 @@
 from debugprov.console_evaluation import ConsoleEvaluation
 from debugprov.node import Node
-from debugprov.execution_tree import ExecutionTree
+from debugprov.treegui.execution_tree import ExecutionTree
 from debugprov.validity import Validity
-from debugprov.visualization import Visualization
+from debugprov.treegui.visualization import Visualization
 from debugprov.answer_reader import AnswerReader
-from debugprov.navigation_logger import NavigationLogger
-from debugprov import autotest
+from debugprov.navegation.navigation_logger import NavigationLogger
+from debugprov.autotest import autotest
 
 class NavigationStrategy:
 

@@ -2,8 +2,8 @@ import sys
 from debugprov.console_interface import ConsoleInterface
 from debugprov.now_interface import NowInterface
 import traceback
-from debugprov.json_manager import create_json
-from debugprov.cls import limpa
+from debugprov.autotest.json_manager import create_json
+from debugprov.autotest.cls import limpa
 
 def main():
       try:

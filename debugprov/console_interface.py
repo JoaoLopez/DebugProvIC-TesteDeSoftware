@@ -6,13 +6,13 @@ from graphviz import Graph
 from prompt_toolkit.shortcuts import confirm, prompt
 
 from debugprov.node import Node
-from debugprov.execution_tree_creator import ExecTreeCreator
-from debugprov.top_down import TopDown
-from debugprov.heaviest_first import HeaviestFirst
-from debugprov.visualization import Visualization
-from debugprov.provenance_enhancement import ProvenanceEnhancement
-from debugprov.single_stepping import SingleStepping
-from debugprov.divide_and_query import DivideAndQuery
+from debugprov.treegui.execution_tree_creator import ExecTreeCreator
+from debugprov.strategies.top_down import TopDown
+from debugprov.strategies.heaviest_first import HeaviestFirst
+from debugprov.treegui.visualization import Visualization
+from debugprov.provenance.provenance_enhancement import ProvenanceEnhancement
+from debugprov.strategies.single_stepping import SingleStepping
+from debugprov.strategies.divide_and_query import DivideAndQuery
 from debugprov.validity import Validity
 
 

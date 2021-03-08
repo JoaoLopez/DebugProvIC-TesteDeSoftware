@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from debugprov.dependency_rel import DependencyRel
+from debugprov.treegui.dependency_rel import DependencyRel
 from debugprov.evaluation import Evaluation
 import logging
 
