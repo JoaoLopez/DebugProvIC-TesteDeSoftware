@@ -1,3 +1,4 @@
+import sys
 from debugprov.node import Node
 from prompt_toolkit.shortcuts import confirm
 #from debugprov.json_manager import add_node_to_json
@@ -16,6 +17,34 @@ class ConsoleEvaluation:
             print (" {} | {} ".format(p.name, p.value))
         print("Returns: {}".format(node.retrn))
         #answer = confirm('Is correct? ')
-        answer = True
-        
+        answer = auto_answer(node.ev_id)
+        if not answer:
+            node.retrn = input("What is the expected return?")
         return answer
+
+
+def auto_answer(ev_id):
+    '''
+    duas metodologias:
+        - sinal vermelho     = Os nós que estão listados DEVEM parar
+            Pede confirmação somente dos nós da lista                    
+            confirm() if x not in lista else True
+        
+        - sinal verde        = Os nós que estão listados PASSAM automaticamente
+            Pede confirmação somente dos nós que não estão na lista      
+            confirm() if x in lista else True
+    '''
+    ev_id = str(ev_id)
+    name = sys.argv[0][:-3]+"_spots.txt"
+    try:
+        with open(name) as e:
+            #print("File exists")
+            lin = e.readline().split()
+            if lin[0].startswith("hot"):
+                return confirm('Is correct? ') if ev_id in lin else True
+            else:
+                return confirm('Is correct? ') if ev_id not in lin else True
+    except:
+        print(f"File <{name}>does not exists")
+        return confirm('Is correct? ')
+    

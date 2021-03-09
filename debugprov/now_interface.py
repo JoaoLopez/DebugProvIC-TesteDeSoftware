@@ -11,4 +11,4 @@ class NowInterface:
         now_call.extend(args)
         proc = subprocess.Popen(now_call, cwd=os.getcwd(), env=os.environ, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = proc.communicate()
-        print(stdout.decode('utf-8'))
+        #print(stdout.decode('utf-8'))
