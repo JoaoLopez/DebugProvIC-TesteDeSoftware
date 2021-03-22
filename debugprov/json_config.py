@@ -1,9 +1,15 @@
 import json
 import sys
+from prompt_toolkit.shortcuts import confirm, prompt
+from pprint import pprint
 
-def read_json()
-    with open('debugprov_params.json', 'r') as json_file:
-        data = json.load(json_file)
+def read_json():
+    #print(getcwd())
+    try:
+        with open('debugprov_params.json', 'r') as json_file:
+            data = json.load(json_file)
+    except:
+        data = dict()
     return data
     
 def get_at_json(key, default_value):
@@ -16,13 +22,13 @@ def get_at_json(key, default_value):
     ('[4]' - Para perguntar qual provenance usar)
     '''
     data = read_json()
-    module = module.name
+    module = module_name()
     
     if data.get('auto_navegation').get(module):
         if data.get('auto_navegation').get(module).get(key):
-            default_value = data.get('auto_navegation').get(module).get(key)
+            return data.get('auto_navegation').get(module).get(key)
     elif data.get(key):
-        default_value = data.get(provenance)
+        return data.get(key)
     return default_value
 
 
@@ -47,21 +53,33 @@ def get_strategy(nav_names):
         strategy = prompt('> ')
     return strategy
 
-def show_tree():
+def get_show_tree():
     show = bool(get_at_json('show_tree', False))
     return show
 
 def get_auto_evaluation_node(nodo):
-    conj = set(get_at_json("nodes"), [])
-    should_ask_for_confirmation = nodo in conj
-    everything_passes_except = get_at_json("everything passes except", True)
-    if not everything_passes_except:
-        should_ask_for_confirmation=not(should_ask_for_confirmation)
-    if should_ask_for_confirmation:
-        should_ask_for_confirmation = confirm("[Y/n]")
-        
-    return should_ask_for_confirmation
+    #ans = True
+    conj = (get_at_json("nodes", []))
+    print(f"::{conj}::")
+    #por default, ele é dado como válido
+    #should_ask_for_confirmation = nodo in conj
+    '''Temos duas regras
+        - everything but:      False se tiver em nodes senao True
+        - nothing but:         True  se tiver em nodes senao False
+    
+    '''
+    everything_but = get_at_json("everything but", False)
+    print(f"<{everything_but}>")
+    #pprint(read_json()['auto_navegation'][module_name()])
+    ans = nodo in conj
+    if everything_but:
+        ans = not ans
+    if not ans:
+        ans = confirm()
+    return ans
     
 
 def module_name():
     return sys.argv[0]
+    
+V = "18:43"

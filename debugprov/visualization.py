@@ -4,6 +4,7 @@ from debugprov.execution_tree import ExecutionTree
 from debugprov.node import Node
 from debugprov.validity import Validity
 from debugprov.evaluation import Evaluation
+from debugprov.json_config import get_show_tree
 
 class Visualization:
 
@@ -16,6 +17,7 @@ class Visualization:
 
     def __init__(self, exec_tree: ExecutionTree):
         self.exec_tree = exec_tree
+        self.show = get_show_tree()
 
     def generate_exec_tree(self, graph_name = 'exec_tree'):
         file_name = "{}.gv".format(graph_name)
@@ -46,8 +48,8 @@ class Visualization:
                 if not isinstance(d,Evaluation):
                     self.graph.edge(str(d.source.ev_id), str(d.target.ev_id), None, color=self.PROVENANCE_EDGE_COLOR, dir='back')
 
-    def view_exec_tree(self, graph_name = 'exec_tree', show=False):
-        if show:
+    def view_exec_tree(self, graph_name = 'exec_tree', sshow=False):
+        if self.show:
             self.generate_exec_tree(graph_name)
             self.graph.view()
 

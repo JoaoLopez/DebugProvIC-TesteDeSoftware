@@ -14,6 +14,7 @@ from debugprov.provenance_enhancement import ProvenanceEnhancement
 from debugprov.single_stepping import SingleStepping
 from debugprov.divide_and_query import DivideAndQuery
 from debugprov.validity import Validity
+from debugprov import json_config
 
 
 class CustomVisualization(Visualization):
@@ -54,10 +55,12 @@ class ConsoleInterface:
         
     def select_nav_strategy(self):
         nav_names = [n.__name__ for n in self.NAVIGATION_STRATEGIES]
-        print("Choose a navigation strategy: ")
+        '''print("Choose a navigation strategy: ")
         for idx,obj in enumerate(nav_names):
             print('[{}] - {}'.format(str(idx+1),obj))
         ans = prompt('> ')
+        '''
+        ans = json_config.get_strategy(nav_names)
         self.choosen_nav_strategy = self.NAVIGATION_STRATEGIES[int(ans)-1] 
         
     def ask_use_prov(self):
@@ -98,11 +101,12 @@ class ConsoleInterface:
         nav = self.choosen_nav_strategy(exec_tree) 
         print(nav, type(nav))
         #use_prov = self.ask_use_prov()
-        use_prov = False
+        use_prov = json_config.get_provenance_criteria()
         
         if use_prov:
             prov = ProvenanceEnhancement(exec_tree, cursor)
-            strategy = self.ask_use_wrong_data() 
+            #strategy = self.ask_use_wrong_data() 
+            strategy = use_prov
             if strategy == 1:
                 # Slice Criterion: last print
                 wrong_data_id = prov.get_last_print_evid()
@@ -123,6 +127,6 @@ class ConsoleInterface:
         result_tree = nav.navigate()
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
-        vis.view_exec_tree(file_name, show=True)
+        vis.view_exec_tree(file_name)
         
     

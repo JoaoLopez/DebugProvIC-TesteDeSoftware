@@ -2,6 +2,7 @@ import sys
 from debugprov.node import Node
 from prompt_toolkit.shortcuts import confirm
 #from debugprov.json_manager import add_node_to_json
+from debugprov.json_config import get_auto_evaluation_node
 
 
 class ConsoleEvaluation:
@@ -17,7 +18,8 @@ class ConsoleEvaluation:
             print (" {} | {} ".format(p.name, p.value))
         print("Returns: {}".format(node.retrn))
         #answer = confirm('Is correct? ')
-        answer = auto_answer(node.ev_id)
+        #answer = auto_answer(node.ev_id)
+        answer = get_auto_evaluation_node(node.ev_id)
         if not answer:
             node.retrn = input("What is the expected return?")
         return answer
