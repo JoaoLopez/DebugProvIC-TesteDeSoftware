@@ -10,6 +10,7 @@ def main():
             limpa()
             NowInterface().run_script()
             ConsoleInterface().run()
+            
             main_coverage()
       except:
             traceback.print_exc()      

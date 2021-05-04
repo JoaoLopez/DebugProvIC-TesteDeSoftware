@@ -99,7 +99,6 @@ class ConsoleInterface:
         exec_tree = creator.create_exec_tree()
         self.select_nav_strategy()
         nav = self.choosen_nav_strategy(exec_tree) 
-        print(nav, type(nav))
         #use_prov = self.ask_use_prov()
         use_prov = json_config.get_provenance_criteria()
         

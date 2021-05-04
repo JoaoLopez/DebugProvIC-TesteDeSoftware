@@ -24,8 +24,6 @@ def main_coverage():
     move_coverage_folder()
     metrify()
     
-    
-
 def move_coverage_folder():
     module_path = f"holdcoverages\\{module_name()[:-3]}\\"
     try:
