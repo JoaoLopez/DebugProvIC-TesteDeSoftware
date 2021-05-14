@@ -22,6 +22,8 @@ class ConsoleEvaluation:
         answer = get_auto_evaluation_node(node.ev_id)
         if not answer:
             node.retrn = input("What is the expected return?")
+            if node.retrn is "" or node.retrn.startswith("<module "):
+                node.retrn = None
         return answer
 
 

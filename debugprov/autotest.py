@@ -58,8 +58,8 @@ class Binder:
         :return list de strings pronta para ser impressa.
         '''
         
-        #if not entrada['validity']:
-        #    return []
+        if entrada['retrn'] is None:
+            return None
         my_list = []
         #Criando o nome do teste
         nome_do_teste = f"{tabs(1)}def test_node_{entrada['ev_id']}_{len(self.content)}(self):"    
