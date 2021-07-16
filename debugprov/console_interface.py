@@ -14,6 +14,7 @@ from debugprov.provenance_enhancement import ProvenanceEnhancement
 from debugprov.single_stepping import SingleStepping
 from debugprov.divide_and_query import DivideAndQuery
 from debugprov.validity import Validity
+#from debugprov.to_test import create_test
 
 class CustomVisualization(Visualization):
 
@@ -111,9 +112,14 @@ class ConsoleInterface:
                 print("Tell me which ID ")
                 ev_id = int(prompt('> '))
                 prov.enhance(ev_id)
-
+    
         result_tree = nav.navigate()
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
+        
+        for nd in exec_tree.get_all_nodes():
+            print(nd.node_to_test(1))
+        
+        
         vis.view_exec_tree(file_name)
     

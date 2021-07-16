@@ -1,3 +1,4 @@
+from ast import literal_eval
 from debugprov.node import Node
 from prompt_toolkit.shortcuts import confirm
 
@@ -14,4 +15,7 @@ class ConsoleEvaluation:
             print (" {} | {} ".format(p.name, p.value))
         print("Returns: {}".format(node.retrn))
         answer = confirm('Is correct? ')
+        if not answer:
+            node.retrn = literal_eval(input("What would be the correct answer?"))
+        node.revised = True
         return answer

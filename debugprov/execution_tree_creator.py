@@ -10,12 +10,13 @@ class ExecTreeCreator():
                       "natural join activation ACT "
                       "join code_component CC on EV.code_component_id = CC.id "
                       "where activation_id = ? ")
+        self.all_nodes = []
 
     def create_exec_tree(self):
         root_node = self.get_root()
         root_node.childrens = self.get_childrens_of_node(root_node)
         self.get_params(root_node)
-        return ExecutionTree(root_node)
+        return ExecutionTree(root_node, self)
 
     def get_root(self) -> Node:
         self.cursor.execute(self.query, [0])
@@ -26,6 +27,7 @@ class ExecTreeCreator():
 
         for tupl in self.cursor.execute(self.query, [0]):
             root = Node(tupl[0], tupl[1], tupl[2], tupl[3], None)
+            
             return root
 
     def get_childrens_of_node(self, node):

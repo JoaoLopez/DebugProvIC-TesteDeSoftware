@@ -2,7 +2,7 @@ from debugprov.node import Node
 
 class ExecutionTree:
 
-    def __init__(self, root_node:Node):
+    def __init__(self, root_node:Node, tree_creator):
         self.root_node = root_node
         self.buggy_node = None
         self.node_under_evaluation = None
