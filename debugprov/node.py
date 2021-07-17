@@ -50,6 +50,8 @@ class Node:
 
     def node_to_test(self, nbs):
         lines = ""
+        if any(self.ev_id == 1, not self.has_childrens()):
+            return ""
         if self.revised:            
             lines = ""
             lines+=f'{" "*4}def test_node_{self.ev_id}_{nbs}(self):\n'
@@ -60,7 +62,7 @@ class Node:
             retrn+=f"), {self.retrn})\n"
             lines+=retrn
             lines+='\n\n'
-            print(lines)
+            #print(lines)
             #with open(SCRIPT_NAME, 'a', encoding='utf-8') as opt:
             #    opt.write(lines)
         return lines    
