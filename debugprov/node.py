@@ -15,6 +15,7 @@ class Node:
         self.validity = Validity.UNKNOWN
         self.params = []
         self.tree = []
+        self.revised = False
 
     def has_childrens(self):
         return len(self.childrens) > 0
@@ -50,10 +51,8 @@ class Node:
 
     def node_to_test(self, nbs):
         lines = ""
-        if any(self.ev_id == 1, not self.has_childrens()):
-            return ""
-        if self.revised:            
-            lines = ""
+        if all([self.ev_id != 1, self.has_childrens(), self.revised]):
+            lines = "\n"
             lines+=f'{" "*4}def test_node_{self.ev_id}_{nbs}(self):\n'
             retrn = f"{' '*8}self.assertEqual({self.function_name}("
             for n, param in enumerate(self.params):
@@ -61,7 +60,7 @@ class Node:
                 retrn+=f'var_{n}, '
             retrn+=f"), {self.retrn})\n"
             lines+=retrn
-            lines+='\n\n'
+            lines+='\n'
             #print(lines)
             #with open(SCRIPT_NAME, 'a', encoding='utf-8') as opt:
             #    opt.write(lines)

@@ -53,7 +53,7 @@ class NavigationStrategy:
     def _interactive_evaluation(self, node: Node) -> Node:
         self.exec_tree.node_under_evaluation = node
         vis = Visualization(self.exec_tree)
-        vis.view_exec_tree(str(id(node)))
+        #vis.view_exec_tree(str(id(node)))
         answer = ConsoleEvaluation.evaluate_node(node)
         if answer:
             # The YES answer prunes the subtree rooted at N

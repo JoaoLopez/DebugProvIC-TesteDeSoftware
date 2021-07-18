@@ -14,7 +14,7 @@ from debugprov.provenance_enhancement import ProvenanceEnhancement
 from debugprov.single_stepping import SingleStepping
 from debugprov.divide_and_query import DivideAndQuery
 from debugprov.validity import Validity
-#from debugprov.to_test import create_test
+from debugprov.to_test import serialize_new_tests
 
 class CustomVisualization(Visualization):
 
@@ -57,12 +57,14 @@ class ConsoleInterface:
         print("Choose a navigation strategy: ")
         for idx,obj in enumerate(nav_names):
             print('[{}] - {}'.format(str(idx+1),obj))
-        ans = prompt('> ')
+        #ans = prompt('> ')
+        ans = 1    #remover mais tarde
         self.choosen_nav_strategy = self.NAVIGATION_STRATEGIES[int(ans)-1] 
         
     def ask_use_prov(self):
-        return confirm('Do you want to use provenance enhancement? ')
-
+        #return confirm('Do you want to use provenance enhancement? ')
+        return False
+        
     def ask_use_wrong_data(self):
         ans = 0
         while (ans != 1 and ans != 2 and ans != 3):
@@ -116,10 +118,7 @@ class ConsoleInterface:
         result_tree = nav.navigate()
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
-        
-        for nd in exec_tree.get_all_nodes():
-            print(nd.node_to_test(1))
-        
+        serialize_new_tests(exec_tree.get_all_nodes())
         
         vis.view_exec_tree(file_name)
     

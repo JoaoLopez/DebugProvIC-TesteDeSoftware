@@ -14,7 +14,8 @@ class ConsoleEvaluation:
         for p in node.params:
             print (" {} | {} ".format(p.name, p.value))
         print("Returns: {}".format(node.retrn))
-        answer = confirm('Is correct? ')
+        #answer = confirm('Is correct? ')
+        answer = True
         if not answer:
             node.retrn = literal_eval(input("What would be the correct answer?"))
         node.revised = True
