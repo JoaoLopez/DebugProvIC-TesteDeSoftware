@@ -14,7 +14,7 @@ from debugprov.provenance_enhancement import ProvenanceEnhancement
 from debugprov.single_stepping import SingleStepping
 from debugprov.divide_and_query import DivideAndQuery
 from debugprov.validity import Validity
-from debugprov.to_test import serialize_new_tests
+from debugprov.to_test import serialize_new_tests, execute_coverage
 
 class CustomVisualization(Visualization):
 
@@ -119,6 +119,6 @@ class ConsoleInterface:
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
         serialize_new_tests(exec_tree.get_all_nodes())
-        
+        execute_coverage()
         vis.view_exec_tree(file_name)
     
