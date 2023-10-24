@@ -1,9 +1,13 @@
 from __future__ import unicode_literals
 
+import os
 import sqlite3
 
 from graphviz import Graph
 from prompt_toolkit.shortcuts import confirm, prompt
+
+from debugprov.entities.main_script import MainScript
+from debugprov.script_analysis.main_script_analyser import MainScriptAnalyser
 
 from debugprov.node import Node
 from debugprov.execution_tree_creator import ExecTreeCreator
@@ -84,7 +88,18 @@ class ConsoleInterface:
         out_filename = prompt('Output file name: ', default='exec_tree')
         return out_filename
 
+    def create_main_script(self, main_script_path):
+        exp_base_dir, main_script_name = os.path.split(main_script_path)    
+        return MainScript(exp_base_dir, main_script_name)
+        
+    def analyze_main_script(self):
+        MainScriptAnalyser(self.main_script).analyse()
+        
     def run(self):
+        import sys
+        self.main_script = self.create_main_script(sys.argv[0])
+        self.analyze_main_script()
+ 
         self.db_path = self.DEFAULT_SQLITE_PATH
         try:
             cursor = sqlite3.connect(self.db_path).cursor()
