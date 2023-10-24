@@ -35,12 +35,13 @@ def execute_coverage():
     os.system(f'coverage run -m unittest test_{MODULE}.py')
     if not os.path.isdir("coverage_data"):
         os.mkdir('coverage_data')
-    if not os.path.isdir(f"coverage_data\\{MODULE}"):
-        os.mkdir(f'coverage_data\\{MODULE}')
-    total_files = len(os.listdir(f'coverage_data\\{MODULE}'))
-    PATH = f"coverage_data\\{MODULE}\\{str(total_files).zfill(2)}_{MODULE}"
+    PATH = os.path.join("coverage_data", MODULE)
+    if not os.path.isdir(PATH):
+        os.mkdir(PATH)
+    total_files = len(os.listdir(PATH))
+    PATH = os.path.join(PATH, f"{str(total_files).zfill(2)}_{MODULE}")
     os.mkdir(PATH)
     os.system("coverage html")
     
     shutil.move("htmlcov", PATH)
-    shutil.copy(f"test_{MODULE}.py", f"{PATH}\\test_{MODULE}.txt")
+    shutil.copy(f"test_{MODULE}.py", os.path.join(PATH, f"test_{MODULE}.txt"))
