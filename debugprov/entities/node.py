@@ -1,5 +1,5 @@
 from debugprov.parameter import Parameter
-from debugprov.validity import Validity
+from debugprov.util import Validity
 
 class Node:
     
@@ -51,6 +51,7 @@ class Node:
 
     def node_to_test(self, nbs):
         lines = ""
+        print(self.ev_id != 1, self.has_childrens(), self.revised)
         if all([self.ev_id != 1, self.has_childrens(), self.revised]):
             lines = "\n"
             lines+=f'{" "*4}def test_node_{self.ev_id}_{nbs}(self):\n'
