@@ -1,5 +1,13 @@
 import ast, os
 
+from enum import Enum
+
+class Validity(Enum):
+    VALID = 1
+    INVALID = 2
+    UNKNOWN = 3
+    NOT_IN_PROV = 4
+
 def get_AST(file_name):
     """This function receives the path of a Python file and returns the AST of its source code"""
     try:
