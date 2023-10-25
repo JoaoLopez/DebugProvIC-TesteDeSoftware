@@ -1,7 +1,6 @@
 import ast, os
 
 from enum import Enum
-from debugprov.entities.main_script import MainScript
 
 class Validity(Enum):
     VALID = 1
@@ -52,14 +51,3 @@ def get_relative_path(script_folder, imported_script_name):
         return os.path.join(normalized_path, "__init__.py")
     elif(os.path.isfile(normalized_path + ".py")):
         return normalized_path + ".py"
-
-def is_an_user_defined_function(function_name:str, main_script:MainScript):
-    if function_name in main_script.functions:
-        return True
-    
-    for script in main_script.imported_scripts.values():
-        for func in script.functions:
-            if function_name in [func, ".".join([script.name[:-3], func])]:
-                return True
-    
-    return False

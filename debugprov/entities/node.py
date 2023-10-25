@@ -1,4 +1,4 @@
-from debugprov.util import Validity, is_an_user_defined_function
+from debugprov.util import Validity
 
 class Parameter:
     def __init__(self, name, value):
@@ -52,18 +52,22 @@ class Node:
         for tupl in cursor.execute(query, [self.ev_id]):
             self.params.append(Parameter(tupl[0], tupl[1]))
 
+    def will_possibly_be_testable(self, main_script):
+        #Note: if "main_script.is_a_testable_function(self.function_name)" returns True, this node is certainly testable not possibly, so we return False.
+        return all([self.ev_id != 1, main_script.is_a_testable_function(self.function_name) is None])
+
     def __clean_function_name(self):
         #if the function name is on the form "MODULE.FUNCTION" it will be set to "FUNCTION"
         last_dot = self.function_name.rfind(".")
         if last_dot != -1:
             self.function_name = self.function_name[last_dot+1:]
 
-    def __node_is_testable(self, main_script):        
-        return all([self.ev_id != 1, is_an_user_defined_function(self.function_name, main_script), self.revised])
+    def __is_testable(self, main_script):        
+        return all([self.ev_id != 1, main_script.is_a_testable_function(self.function_name), self.revised])
 
     def get_test_code(self, main_script, round_id:int) -> str:
         test_code = ""
-        if self.__node_is_testable(main_script):
+        if self.__is_testable(main_script):
             self.__clean_function_name()
             test_code += f'{" "*4}def test_{self.function_name}_{self.ev_id}_{round_id}(self):\n'
             for param in self.params:

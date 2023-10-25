@@ -1,3 +1,4 @@
+from typing import Optional
 import ast
 
 class MainScript():
@@ -9,6 +10,30 @@ class MainScript():
         self.__imported_scripts = None
         self.__functions = None
 
+    def __get_user_defined_function(self, function_name:str) -> Optional[ast.FunctionDef]:
+        if function_name in self.functions:
+            return self.functions[function_name]
+        
+        for script in self.imported_scripts.values():
+            for func in script.functions:
+                if function_name in [func, ".".join([script.name[:-3], func])]:
+                    return script.functions[func]
+
+    def is_a_testable_function(self, function_name:str) -> Optional[bool]:
+        func = self.__get_user_defined_function(function_name)
+
+        if func is None: #it is not an user defined function
+            return False
+
+        if not hasattr(func, "safe_for_testing"):
+            func.safe_for_testing = None
+
+        return func.safe_for_testing
+        
+    def set_function_safe_for_testing(self, function_name:str, value:bool):
+        func = self.__get_user_defined_function(function_name)
+        func.safe_for_testing = value
+        
     ###DEBUG####
     def print(self, indent=0):
         print(indent * " " + "##### MAIN SCRIPT #####")

@@ -1,15 +1,16 @@
-from debugprov.cli.console_evaluation import ConsoleEvaluation
+from debugprov.entities.main_script import MainScript
 from debugprov.entities.node import Node
 from debugprov.execution_tree.execution_tree import ExecutionTree
 from debugprov.util import Validity
 from debugprov.visualization.visualization import Visualization
 from debugprov.navigation_strategies.answer_reader import AnswerReader
-from debugprov.navigation_strategies.navigation_logger import NavigationLogger
+from debugprov.cli.evaluation import evaluate_node
 
 class NavigationStrategy:
 
-    def __init__(self, exec_tree: ExecutionTree, automated = False, answer_file = None):
+    def __init__(self, exec_tree: ExecutionTree, main_script:MainScript, automated = False, answer_file = None):
         self.exec_tree = exec_tree
+        self.main_script = main_script
         self.AUTOMATED_NAVIGATION = automated
         if self.AUTOMATED_NAVIGATION:
             answer_reader = AnswerReader(answer_file)
@@ -54,7 +55,7 @@ class NavigationStrategy:
         self.exec_tree.node_under_evaluation = node
         vis = Visualization(self.exec_tree)
         #vis.view_exec_tree(str(id(node)))
-        answer = ConsoleEvaluation.evaluate_node(node)
+        answer = evaluate_node(node, self.main_script)
         if answer:
             # The YES answer prunes the subtree rooted at N
             self.recursive_validate(node)
