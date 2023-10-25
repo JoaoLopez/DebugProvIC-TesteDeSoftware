@@ -1,9 +1,9 @@
-from debugprov.node import Node
-from debugprov.dependency_rel import DependencyRel
-from debugprov.validity import Validity
-from debugprov.execution_tree import ExecutionTree
-from debugprov.visualization import Visualization
-from debugprov.provenance_tools import ProvenanceTools
+from debugprov.entities.node import Node
+from debugprov.provenance_enhancement.dependency_rel import DependencyRel
+from debugprov.util import Validity
+from debugprov.execution_tree.execution_tree import ExecutionTree
+from debugprov.visualization.visualization import Visualization
+from debugprov.provenance_enhancement.provenance_tools import ProvenanceTools
 from debugprov.evaluation import Evaluation
 #import logging
 
