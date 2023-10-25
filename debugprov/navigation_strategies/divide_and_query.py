@@ -1,7 +1,7 @@
-from debugprov.navgiation_strategy import NavigationStrategy
-from debugprov.node import Node
-from debugprov.validity import Validity
-from debugprov.execution_tree import ExecutionTree
+from debugprov.navigation_strategies.navigation_strategy import NavigationStrategy
+from debugprov.entities.node import Node
+from debugprov.util import Validity
+from debugprov.execution_tree.execution_tree import ExecutionTree
 
 class DivideAndQuery(NavigationStrategy):
 

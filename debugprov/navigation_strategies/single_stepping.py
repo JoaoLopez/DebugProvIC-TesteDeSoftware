@@ -1,6 +1,6 @@
-from debugprov.navgiation_strategy import NavigationStrategy
-from debugprov.node import Node
-from debugprov.validity import Validity
+from debugprov.navigation_strategies.navigation_strategy import NavigationStrategy
+from debugprov.entities.node import Node
+from debugprov.util import Validity
 
 class SingleStepping(NavigationStrategy):
     

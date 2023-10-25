@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-from debugprov.node import Node
+from debugprov.entities.node import Node
 
 class NavigationLogger:
 
