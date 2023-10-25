@@ -1,4 +1,4 @@
-from debugprov.util import Validity
+from debugprov.util import Validity, is_an_user_defined_function
 
 class Parameter:
     def __init__(self, name, value):
@@ -13,15 +13,15 @@ class Node:
         self.name = name
         self.function_name = self.name[:self.name.find("(")]
         self.parent = parent
-        self.childrens = []
-        self.permanent_childrens = []
+        self.children = []
+        self.permanent_children = []
         self.validity = Validity.UNKNOWN
         self.params = []
         self.tree = []
         self.revised = False
 
-    def has_childrens(self):
-        return len(self.childrens) > 0
+    def has_children(self):
+        return len(self.children) > 0
 
     def get_root(self):
         foo = self
@@ -31,13 +31,13 @@ class Node:
         foo.tree.append(self)
 
     def has_childrens_with_validity(self, validity:Validity):
-        for c in self.childrens:
+        for c in self.children:
             if c.validity is validity:
                 return True
         return False 
     
     def all_childrens_are_valid(self):
-        for chd in self.childrens:
+        for chd in self.children:
             if chd.validity is not Validity.VALID:
                 return False
         return True
@@ -52,23 +52,29 @@ class Node:
         for tupl in cursor.execute(query, [self.ev_id]):
             self.params.append(Parameter(tupl[0], tupl[1]))
 
-    def node_to_test(self, nbs):
-        lines = ""
-        print(self.ev_id != 1, self.has_childrens(), self.revised)
-        if all([self.ev_id != 1, self.has_childrens(), self.revised]):
-            lines = "\n"
-            lines+=f'{" "*4}def test_node_{self.ev_id}_{nbs}(self):\n'
-            retrn = f"{' '*8}self.assertEqual({self.function_name}("
-            for n, param in enumerate(self.params):
-                lines+=f"{' '*8}var_{n} = {param.value}\n" 
-                retrn+=f'var_{n}, '
-            retrn+=f"), {self.retrn})\n"
-            lines+=retrn
-            lines+='\n'
-            #print(lines)
-            #with open(SCRIPT_NAME, 'a', encoding='utf-8') as opt:
-            #    opt.write(lines)
-        return lines    
+    def __clean_function_name(self):
+        #if the function name is on the form "MODULE.FUNCTION" it will be set to "FUNCTION"
+        last_dot = self.function_name.rfind(".")
+        if last_dot != -1:
+            self.function_name = self.function_name[last_dot+1:]
+
+    def __node_is_testable(self, main_script):        
+        return all([self.ev_id != 1, is_an_user_defined_function(self.function_name, main_script), self.revised])
+
+    def get_test_code(self, main_script, round_id:int) -> str:
+        test_code = ""
+        if self.__node_is_testable(main_script):
+            self.__clean_function_name()
+            test_code += f'{" "*4}def test_{self.function_name}_{self.ev_id}_{round_id}(self):\n'
+            for param in self.params:
+                test_code += f"{' '*8}{param.name} = {param.value}\n" 
+            
+            test_code += f"{' '*8}self.assertEqual({self.function_name}("
+            for param in self.params:
+                test_code += f"{param.name}, "
+
+            test_code += f"), {self.retrn})\n\n"
+        return test_code
     
     def get_name(self):
         return "{} {}".format(self.ev_id, self.name)
