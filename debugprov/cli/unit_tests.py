@@ -1,7 +1,7 @@
 import sys, os
 import shutil
 
-def serialize_new_tests(all_nodes):
+def create_unit_tests(all_nodes):
     FILENAME = f"test_{sys.argv[0]}"
     MODULE = sys.argv[0][:-3]
     print("FILENAME: ", FILENAME)

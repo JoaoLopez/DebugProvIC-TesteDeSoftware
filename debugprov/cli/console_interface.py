@@ -18,7 +18,7 @@ from debugprov.provenance_enhancement.provenance_enhancement import ProvenanceEn
 from debugprov.navigation_strategies.single_stepping import SingleStepping
 from debugprov.navigation_strategies.divide_and_query import DivideAndQuery
 from debugprov.util import Validity
-from debugprov.to_test import serialize_new_tests, execute_coverage
+from debugprov.cli.unit_tests import create_unit_tests, execute_coverage
 
 class ConsoleInterface:
 
@@ -105,7 +105,7 @@ class ConsoleInterface:
         result_tree = nav.navigate()
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
-        serialize_new_tests(exec_tree.get_all_nodes())
+        create_unit_tests(exec_tree.get_all_nodes())
         execute_coverage()
         vis.view_exec_tree(file_name)
     
