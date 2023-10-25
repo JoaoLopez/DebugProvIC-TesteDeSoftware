@@ -1,5 +1,5 @@
 import json
-from debugprov.validity import Validity
+from debugprov.util import Validity
 
 class AnswerReader:
 

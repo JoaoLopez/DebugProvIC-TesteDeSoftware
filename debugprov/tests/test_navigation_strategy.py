@@ -1,9 +1,9 @@
 import unittest
 import sys
 
-from debugprov.navgiation_strategy import NavigationStrategy
-from debugprov.execution_tree import ExecutionTree
-from debugprov.node import Node
+from debugprov.navigation_strategies.navigation_strategy import NavigationStrategy
+from debugprov.execution_tree.execution_tree import ExecutionTree
+from debugprov.entities.node import Node
 
 class NavigationStrategyTest(unittest.TestCase):
 

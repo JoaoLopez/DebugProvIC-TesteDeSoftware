@@ -1,5 +1,5 @@
-from debugprov.console_interface import ConsoleInterface
-from debugprov.now_interface import NowInterface
+from debugprov.cli.console_interface import ConsoleInterface
+from debugprov.cli.now_interface import NowInterface
 import traceback
 
 def main():

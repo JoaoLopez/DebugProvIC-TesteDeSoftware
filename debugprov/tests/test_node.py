@@ -1,6 +1,6 @@
 import unittest
 
-from debugprov.node import Node
+from debugprov.entities.node import Node
 
 class NodeTest(unittest.TestCase):
 

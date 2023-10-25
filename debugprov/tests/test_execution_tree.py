@@ -1,7 +1,7 @@
 import unittest
 
-from debugprov.execution_tree import ExecutionTree
-from debugprov.node import Node
+from debugprov.execution_tree.execution_tree import ExecutionTree
+from debugprov.entities.node import Node
 
 class ExecutionTreeTest(unittest.TestCase):
 

@@ -2,9 +2,9 @@ import unittest
 import sys
 import sqlite3
 
-from debugprov.execution_tree_creator import ExecTreeCreator
-from debugprov.node import Node
-from debugprov.validity import Validity
+from debugprov.execution_tree.execution_tree_creator import ExecTreeCreator
+from debugprov.entities.node import Node
+from debugprov.util import Validity
 
 class ExecTreeCreatorTest(unittest.TestCase):
 
