@@ -12,7 +12,7 @@ class CustomVisualization(Visualization):
         return " {} {} '{}'".format(str(node.ev_id),node.name,str(node.retrn))
 
     def navigate(self, node:Node):
-        chds = node.childrens
+        chds = node.children
         for n in chds:
             self.graph.edge(str(node.ev_id), str(n.ev_id), None, dir='forward')
             if n.validity == Validity.INVALID:

@@ -13,5 +13,5 @@ class TopDown(NavigationStrategy):
         if self.there_are_nodes_with_unknown_validity():
             self.evaluate(node)
             if node.validity is not Validity.VALID:
-                for n in node.childrens:
+                for n in node.children:
                     self.recursive_navigate(n)

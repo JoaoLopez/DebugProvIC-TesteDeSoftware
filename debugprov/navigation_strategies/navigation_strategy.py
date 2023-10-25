@@ -66,12 +66,12 @@ class NavigationStrategy:
         self.exec_tree.node_under_evaluation = None
         return node
 
-    def recursive_validate(self, node, forbidden=None):
+    def recursive_validate(self, node:Node, forbidden=None):
         if node is forbidden:
             return
         if node.validity is Validity.UNKNOWN:
             node.validity = Validity.VALID
-        for c in node.childrens:
+        for c in node.children:
             self.recursive_validate(c,forbidden)
 
     def there_are_nodes_with_unknown_validity(self):

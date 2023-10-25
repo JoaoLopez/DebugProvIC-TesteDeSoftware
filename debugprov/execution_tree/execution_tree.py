@@ -16,7 +16,7 @@ class ExecutionTree:
         nodes = []
         if node.code_component_id == code_component_id:
             nodes.append(node)
-        for c in node.childrens:
+        for c in node.children:
             nodes.extend(self.recursive_search_by_ccid(code_component_id, c))
         return nodes
 
@@ -29,10 +29,10 @@ class ExecutionTree:
     def get_all_nodes(self):
         return self._get_all_nodes(self.root_node)
 
-    def _get_all_nodes(self, node):
+    def _get_all_nodes(self, node:Node):
         nodes = []
         nodes.append(node)
-        if node.childrens is not None and len(node.childrens) > 0:
-            for c in node.childrens:
+        if node.children is not None and len(node.children) > 0:
+            for c in node.children:
                 nodes.extend(self._get_all_nodes(c))
         return nodes

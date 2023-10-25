@@ -12,7 +12,7 @@ class ExecutionTreeTest(unittest.TestCase):
         for i in range(2,10):
             childrens.append(Node(i, i, None, "Node #{}".format(str(i)), root))
 
-        root.childrens = childrens
+        root.children = childrens
         exec_tree = ExecutionTree(root)
         self.assertEqual(exec_tree.root_node, root)
         
@@ -23,7 +23,7 @@ class ExecutionTreeTest(unittest.TestCase):
         for i in range(2,10):
             childrens.append(Node(i, i, None, "Node #{}".format(str(i)), root))
 
-        root.childrens = childrens
+        root.children = childrens
         exec_tree = ExecutionTree(root)
         result = exec_tree.search_by_ccid(4)
         self.assertEqual(len(result), 1)

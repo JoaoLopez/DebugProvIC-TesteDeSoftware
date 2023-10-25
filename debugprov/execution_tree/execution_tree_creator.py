@@ -14,7 +14,7 @@ class ExecTreeCreator():
 
     def create_exec_tree(self):
         root_node = self.get_root()
-        root_node.childrens = self.get_childrens_of_node(root_node)
+        root_node.children = self.get_childrens_of_node(root_node)
         self.get_params(root_node)
         return ExecutionTree(root_node, self)
 
@@ -30,17 +30,17 @@ class ExecTreeCreator():
             
             return root
 
-    def get_childrens_of_node(self, node):
+    def get_childrens_of_node(self, node:Node):
         childrens = []
         for tupl in self.cursor.execute(self.query, [node.ev_id]):
             n = Node(tupl[0], tupl[1], tupl[2], tupl[3], node)
             childrens.append(n)
         for n in childrens:
             chds = self.get_childrens_of_node(n)
-            n.childrens = chds
+            n.children = chds
         return childrens
 
     def get_params(self, node: Node):
-        for chd in node.childrens:
+        for chd in node.children:
             chd.get_parameters(self.cursor)
             self.get_params(chd)

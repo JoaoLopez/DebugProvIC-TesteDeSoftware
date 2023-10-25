@@ -16,7 +16,7 @@ class HeaviestFirst(NavigationStrategy):
             self.evaluate(node)
             if node.validity is not Validity.VALID:
                 # sort by weight, from bigger to smaller
-                sorted_childrens = copy.deepcopy(node.childrens)
+                sorted_childrens = copy.deepcopy(node.children)
                 sorted_childrens.sort(key=lambda x: x.weight, reverse=True)
                 for srtd_n in sorted_childrens:
                     n = self.exec_tree.search_by_ev_id(srtd_n.ev_id)
@@ -24,7 +24,7 @@ class HeaviestFirst(NavigationStrategy):
 
     def weight(self, node: Node):
         summ = 0
-        for c in node.childrens:
+        for c in node.children:
             if c.validity is Validity.UNKNOWN:
                 summ += 1 + self.weight(c)
             else:

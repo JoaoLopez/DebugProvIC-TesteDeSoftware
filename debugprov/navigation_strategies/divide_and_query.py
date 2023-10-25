@@ -22,7 +22,7 @@ class DivideAndQuery(NavigationStrategy):
 
     def weight(self, node: Node):
         summ = 0
-        for c in node.childrens:
+        for c in node.children:
             if c.validity is Validity.UNKNOWN:
                 summ += 1 + self.weight(c)
             else:

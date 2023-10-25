@@ -13,7 +13,7 @@ class SingleStepping(NavigationStrategy):
     def recursive_navigate(self, current_node: Node):
         
         if self.there_are_nodes_with_unknown_validity():
-            if current_node.has_childrens():
-                for c in current_node.childrens:
+            if current_node.has_children():
+                for c in current_node.children:
                     self.recursive_navigate(c)
             self.evaluate(current_node)  

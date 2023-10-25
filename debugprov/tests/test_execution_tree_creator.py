@@ -41,14 +41,14 @@ class ExecTreeCreatorTest(unittest.TestCase):
         self.assertEqual(root_node.code_component_id,1)
         self.assertEqual(root_node.name, 'script-simples.py')
         self.assertIsNone(root_node.parent)
-        self.assertEqual(len(root_node.childrens), 5)
+        self.assertEqual(len(root_node.children), 5)
         self.assertIsNone(exec_tree.buggy_node)
         self.assertIsNone(exec_tree.node_under_evaluation)
         self.assertFalse(exec_tree.is_prov_enhanced)
         self.assertIsNone(exec_tree.dependencies)
         childrens_ids = [9,31,37,42,49]
         idx = 0
-        for c in root_node.childrens:
+        for c in root_node.children:
             self.assertEquals(c.ev_id, childrens_ids[idx])
             idx += 1
         
