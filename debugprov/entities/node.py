@@ -1,8 +1,11 @@
-from debugprov.parameter import Parameter
 from debugprov.util import Validity
 
+class Parameter:
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+
 class Node:
-    
     def __init__(self, ev_id, code_component_id, retrn, name, parent):
         self.ev_id = ev_id
         self.code_component_id = code_component_id
