@@ -1,6 +1,6 @@
 import unittest
 
-from debugprov.evaluation import Evaluation
+from debugprov.entities.evaluation import Evaluation
 
 class EvaluationTest(unittest.TestCase):
 

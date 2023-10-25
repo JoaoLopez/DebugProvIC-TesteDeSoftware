@@ -1,4 +1,4 @@
-from debugprov.evaluation import Evaluation
+from debugprov.entities.evaluation import Evaluation
 
 # Defines a dependency relation between two evalautions
 

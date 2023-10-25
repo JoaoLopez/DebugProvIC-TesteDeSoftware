@@ -4,7 +4,7 @@ from debugprov.util import Validity
 from debugprov.execution_tree.execution_tree import ExecutionTree
 from debugprov.visualization.visualization import Visualization
 from debugprov.provenance_enhancement.provenance_tools import ProvenanceTools
-from debugprov.evaluation import Evaluation
+from debugprov.entities.evaluation import Evaluation
 #import logging
 
 class ProvenanceEnhancement():

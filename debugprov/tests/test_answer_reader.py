@@ -1,6 +1,6 @@
 import unittest
 
-from debugprov.answer_reader import AnswerReader
+from debugprov.navigation_strategies.answer_reader import AnswerReader
 from debugprov.util import Validity
 
 class AnswerReaderTest(unittest.TestCase):

@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 from debugprov.provenance_enhancement.dependency_rel import DependencyRel
-from debugprov.evaluation import Evaluation
+from debugprov.entities.evaluation import Evaluation
 import logging
 
 class ProvenanceTools:

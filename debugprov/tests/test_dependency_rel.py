@@ -2,7 +2,7 @@ import unittest
 import sys
 
 from debugprov.provenance_enhancement.dependency_rel import DependencyRel
-from debugprov.evaluation import Evaluation
+from debugprov.entities.evaluation import Evaluation
 
 class DependencyRelTest(unittest.TestCase):
 

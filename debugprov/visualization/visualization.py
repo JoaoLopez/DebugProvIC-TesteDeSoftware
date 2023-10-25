@@ -3,7 +3,7 @@ from graphviz import Graph
 from debugprov.execution_tree.execution_tree import ExecutionTree
 from debugprov.entities.node import Node
 from debugprov.util import Validity
-from debugprov.evaluation import Evaluation
+from debugprov.entities.evaluation import Evaluation
 
 class Visualization:
 
