@@ -3,7 +3,7 @@ from debugprov.entities.node import Node
 from debugprov.execution_tree.execution_tree import ExecutionTree
 from debugprov.util import Validity
 from debugprov.visualization.visualization import Visualization
-from debugprov.answer_reader import AnswerReader
+from debugprov.navigation_strategies.answer_reader import AnswerReader
 from debugprov.navigation_strategies.navigation_logger import NavigationLogger
 
 class NavigationStrategy:
