@@ -9,44 +9,16 @@ from prompt_toolkit.shortcuts import confirm, prompt
 from debugprov.entities.main_script import MainScript
 from debugprov.script_analysis.main_script_analyser import MainScriptAnalyser
 
-from debugprov.node import Node
-from debugprov.execution_tree_creator import ExecTreeCreator
-from debugprov.top_down import TopDown
-from debugprov.heaviest_first import HeaviestFirst
-from debugprov.visualization import Visualization
-from debugprov.provenance_enhancement import ProvenanceEnhancement
-from debugprov.single_stepping import SingleStepping
-from debugprov.divide_and_query import DivideAndQuery
-from debugprov.validity import Validity
+from debugprov.entities.node import Node
+from debugprov.execution_tree.execution_tree_creator import ExecTreeCreator
+from debugprov.navigation_strategies.top_down import TopDown
+from debugprov.navigation_strategies.heaviest_first import HeaviestFirst
+from debugprov.visualization.visualization import Visualization
+from debugprov.provenance_enhancement.provenance_enhancement import ProvenanceEnhancement
+from debugprov.navigation_strategies.single_stepping import SingleStepping
+from debugprov.navigation_strategies.divide_and_query import DivideAndQuery
+from debugprov.util import Validity
 from debugprov.to_test import serialize_new_tests, execute_coverage
-
-class CustomVisualization(Visualization):
-
-    def name_for_node(self, node:Node):
-        return " {} {} '{}'".format(str(node.ev_id),node.name,str(node.retrn))
-
-    def navigate(self, node:Node):
-        chds = node.childrens
-        for n in chds:
-            self.graph.edge(str(node.ev_id), str(n.ev_id), None, dir='forward')
-            if n.validity == Validity.INVALID:
-                self.graph.node(str(n.ev_id), self.name_for_node(n), fillcolor=self.INVALID_COLOR, style='filled')
-            elif n.validity == Validity.VALID: 
-                self.graph.node(str(n.ev_id), self.name_for_node(n), fillcolor=self.VALID_COLOR, style='filled')
-            elif n.validity == Validity.UNKNOWN:  
-                self.graph.node(str(n.ev_id), self.name_for_node(n))
-            elif n.validity is Validity.NOT_IN_PROV:
-                self.graph.node(str(n.ev_id), self.name_for_node(n), fillcolor=self.PROV_PRUNED_NODE_COLOR, style='filled')
-            
-        if len(chds) > 0:
-            g = Graph()
-            for c in chds:
-                g.node(str(c.ev_id))
-            g.graph_attr['rank']='same'
-            self.graph.subgraph(g)
-
-        for n in chds: 
-            self.navigate(n)
 
 class ConsoleInterface:
 

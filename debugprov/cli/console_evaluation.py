@@ -1,5 +1,5 @@
 from ast import literal_eval
-from debugprov.node import Node
+from debugprov.entities.node import Node
 from prompt_toolkit.shortcuts import confirm
 
 class ConsoleEvaluation:
