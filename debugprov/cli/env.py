@@ -5,7 +5,7 @@ def remove_gvs_and_pdfs_files():
     k=0
     for file in os.listdir():
         if "gv" in file.split("."):
-            print(file) #os.remove(file)
+            os.remove(file)
             k+=1
     print(f"Foram excluídos {k} arquivos")   
 
