@@ -1,3 +1,6 @@
+from typing import Optional
+from debugprov.unit_tests.unit_test import UnitTest
+from debugprov.entities.main_script import MainScript
 from debugprov.util import Validity
 
 class Parameter:
@@ -65,20 +68,23 @@ class Node:
     def __is_testable(self, main_script):        
         return all([self.ev_id != 1, main_script.is_a_testable_function(self.function_name), self.revised])
 
-    def get_test_code(self, main_script, round_id:int) -> str:
-        test_code = ""
+    def __get_unit_test_code(self, round_id:int) -> str:
+        test_code = f'{" "*4}def test_{self.function_name}_{self.ev_id}_{round_id}(self):\n'
+        for param in self.params:
+            test_code += f"{' '*8}{param.name} = {param.value}\n" 
+        
+        test_code += f"{' '*8}self.assertEqual({self.function_name}("
+        for param in self.params:
+            test_code += f"{param.name}, "
+
+        test_code += f"), {self.retrn})\n\n"
+        return test_code
+
+    def get_unit_test(self, main_script:MainScript, round_id:int) -> Optional[UnitTest]:
         if self.__is_testable(main_script):
             self.__clean_function_name()
-            test_code += f'{" "*4}def test_{self.function_name}_{self.ev_id}_{round_id}(self):\n'
-            for param in self.params:
-                test_code += f"{' '*8}{param.name} = {param.value}\n" 
+            test_code = self.__get_unit_test_code(round_id)
+            return UnitTest(self.function_name, test_code)
             
-            test_code += f"{' '*8}self.assertEqual({self.function_name}("
-            for param in self.params:
-                test_code += f"{param.name}, "
-
-            test_code += f"), {self.retrn})\n\n"
-        return test_code
-    
     def get_name(self):
         return "{} {}".format(self.ev_id, self.name)

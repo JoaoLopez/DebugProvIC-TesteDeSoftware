@@ -15,7 +15,7 @@ from debugprov.visualization.visualization import Visualization
 from debugprov.provenance_enhancement.provenance_enhancement import ProvenanceEnhancement
 from debugprov.navigation_strategies.single_stepping import SingleStepping
 from debugprov.navigation_strategies.divide_and_query import DivideAndQuery
-from debugprov.cli.unit_tests import create_unit_tests, execute_coverage
+from debugprov.unit_tests.unit_test_creator import execute_coverage, UnitTestCreator
 
 class ConsoleInterface:
 
@@ -105,7 +105,7 @@ class ConsoleInterface:
         result_tree = nav.navigate()
         file_name = self.ask_output_file_name()
         vis = Visualization(result_tree)
-        create_unit_tests(self.main_script, exec_tree.get_all_nodes())
+        UnitTestCreator(self.main_script, exec_tree.get_all_nodes()).create_unit_tests()
         execute_coverage()
         vis.view_exec_tree(file_name)
     
